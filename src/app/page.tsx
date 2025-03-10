@@ -1,5 +1,5 @@
 import Navigation from "@/components/Navigation";
-import { LocalBusinessHero } from "@/components/LocalBusinessHero";
+// import { LocalBusinessHero } from "@/components/LocalBusinessHero";
 import ScrollButton from "@/components/ScrollButton";
 import Test from "@/components/Test";
 import Image from "next/image";
