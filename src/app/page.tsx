@@ -1,58 +1,119 @@
+import Navigation from "@/components/Navigation";
+import { LocalBusinessHero } from "@/components/LocalBusinessHero";
+import ScrollButton from "@/components/ScrollButton";
+import Test from "@/components/Test";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="min-h-screen font-[family-name:var(--font-geist-sans)]">
+      <Navigation />
+      <main className="w-full">
+        {/* <LocalBusinessHero /> */}
+        <Test />
+        {/* Home Section */}
+        <section id="home" className="min-h-screen flex items-center justify-center p-8 sm:p-20">
+          <div className="max-w-4xl text-center">
+            <h1 className="text-4xl sm:text-6xl font-bold mb-6">Welcome to Forged</h1>
+            <p className="text-xl text-gray-600 mb-8">Crafting excellence in every detail</p>
+            <ScrollButton />
+          </div>
+        </section>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+        {/* About Section */}
+        <section id="about" className="min-h-screen flex items-center justify-center p-8 sm:p-20 bg-gray-50">
+          <div className="max-w-4xl">
+            <h2 className="text-3xl sm:text-5xl font-bold mb-8 text-center">About Us</h2>
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <p className="text-lg text-gray-600 mb-4">
+                  We are a team of passionate craftsmen dedicated to creating exceptional experiences.
+                  Our commitment to quality and innovation drives everything we do.
+                </p>
+                <p className="text-lg text-gray-600">
+                  With years of experience and a deep understanding of our craft,
+                  we deliver solutions that exceed expectations.
+                </p>
+              </div>
+              <div className="relative h-64 md:h-96">
+                <Image
+                  src="/hammer.png"
+                  alt="About us illustration"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Services Section */}
+        <section id="services" className="min-h-screen flex items-center justify-center p-8 sm:p-20">
+          <div className="max-w-4xl">
+            <h2 className="text-3xl sm:text-5xl font-bold mb-12 text-center">Our Services</h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              {['Design', 'Development', 'Consulting'].map((service, index) => (
+                <div key={index} className="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                  <h3 className="text-xl font-bold mb-4">{service}</h3>
+                  <p className="text-gray-600">
+                    Comprehensive {service.toLowerCase()} solutions tailored to your needs.
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section id="contact" className="min-h-screen flex items-center justify-center p-8 sm:p-20 bg-gray-50">
+          <div className="max-w-2xl w-full">
+            <h2 className="text-3xl sm:text-5xl font-bold mb-8 text-center">Contact Us</h2>
+            <form className="space-y-6">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-black focus:border-transparent"
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-black focus:border-transparent"
+                />
+              </div>
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  rows={4}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-black focus:border-transparent"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-black text-white px-6 py-3 rounded-md hover:bg-gray-800 transition-colors"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+
+      <footer className="py-8 px-6 flex gap-6 flex-wrap items-center justify-center">
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+          href="https://nextjs.org/learn"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -67,7 +128,7 @@ export default function Home() {
         </a>
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+          href="https://vercel.com/templates"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -82,7 +143,7 @@ export default function Home() {
         </a>
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+          href="https://nextjs.org"
           target="_blank"
           rel="noopener noreferrer"
         >
