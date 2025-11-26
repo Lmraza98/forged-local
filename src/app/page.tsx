@@ -1,4 +1,5 @@
 // app/page.tsx
+import Link from 'next/link';
 import HeroSection from '@/components/HeroSection';
 
 const jsonLd = {
@@ -23,7 +24,7 @@ export default function HomePage() {
         {/* HEADER */}
         <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/90 backdrop-blur h-16">
           <nav className="container mx-auto flex items-center justify-between px-4 h-full lg:px-8">
-            <a href="/" className="flex items-center">
+            <Link href="/" className="flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 220 40"
@@ -44,29 +45,29 @@ export default function HomePage() {
                   <tspan fill="#FBBF24" textDecoration="underline">Local</tspan>
                 </text>
               </svg>
-            </a>
+            </Link>
 
             <div className="hidden items-center gap-6 text-xs font-medium text-slate-600 md:flex sm:text-sm">
-              <a href="/how-it-works" className="hover:text-slate-900">
+              <Link href="/how-it-works" className="hover:text-slate-900">
                 How it works
-              </a>
-              <a href="#who-we-serve" className="hover:text-slate-900">
+              </Link>
+              <Link href="#who-we-serve" className="hover:text-slate-900">
                 Who it&apos;s for
-              </a>
-              <a href="#pricing" className="hover:text-slate-900">
+              </Link>
+              <Link href="#pricing" className="hover:text-slate-900">
                 Pricing
-              </a>
-              <a href="#contact" className="hover:text-slate-900">
+              </Link>
+              <Link href="#contact" className="hover:text-slate-900">
                 Contact
-              </a>
+              </Link>
             </div>
 
-            <a
+            <Link
               href="#contact"
               className="inline-flex items-center rounded-full bg-amber-400 px-4 py-2 text-xs font-semibold text-slate-900 shadow-sm transition hover:bg-amber-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300 focus-visible:ring-offset-2 focus-visible:ring-offset-white sm:text-sm"
             >
               Book a quick intro call
-            </a>
+            </Link>
           </nav>
         </header>
 
@@ -512,18 +513,18 @@ export default function HomePage() {
           <div className="container mx-auto flex flex-col items-start justify-between gap-4 px-4 py-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:px-6 lg:px-8">
             <p>© 2025 ForgedLocal. All rights reserved.</p>
             <div className="flex flex-wrap gap-4">
-              <a href="/how-it-works" className="hover:text-slate-800">
+              <Link href="/how-it-works" className="hover:text-slate-800">
                 How it works
-              </a>
-              <a href="#who-we-serve" className="hover:text-slate-800">
+              </Link>
+              <Link href="#who-we-serve" className="hover:text-slate-800">
                 Who it&apos;s for
-              </a>
-              <a href="#pricing" className="hover:text-slate-800">
+              </Link>
+              <Link href="#pricing" className="hover:text-slate-800">
                 Pricing
-              </a>
-              <a href="#contact" className="hover:text-slate-800">
+              </Link>
+              <Link href="#contact" className="hover:text-slate-800">
                 Contact
-              </a>
+              </Link>
             </div>
           </div>
         </footer>
