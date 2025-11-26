@@ -2,7 +2,6 @@
 
 import * as React from 'react'
 import { useForm } from '@tanstack/react-form'
-import { zodValidator } from '@tanstack/zod-form-adapter'
 import { z } from 'zod'
 
 export function ContactForm() {
@@ -56,15 +55,14 @@ export function ContactForm() {
         console.error(err)
         setError('Something went wrong. Please email us directly.')
       }
-    },
-    validatorAdapter: zodValidator
+    }
   })
 
   if (isSubmitted) {
     return (
       <div className="rounded-2xl border border-amber-200 bg-amber-50 p-8 text-center">
         <h3 className="mb-2 text-xl font-semibold text-amber-900">Thanks!</h3>
-        <p className="text-amber-800">We'll be in touch shortly to schedule your intro call.</p>
+        <p className="text-amber-800">We&apos;ll be in touch shortly to schedule your intro call.</p>
         <button 
           className="mt-6 text-sm font-medium text-amber-700 hover:text-amber-900 underline"
           onClick={() => {
@@ -90,9 +88,13 @@ export function ContactForm() {
       <form.Field
         name="name"
         validators={{
-          onChange: z.string().min(1, 'Name is required')
+          onChange: ({ value }) => {
+            const result = z.string().min(1, 'Name is required').safeParse(value)
+            if (!result.success) return result.error.errors[0].message
+          }
         }}
-        children={(field) => (
+      >
+        {(field) => (
           <div className="space-y-1">
             <label htmlFor={field.name} className="text-xs font-medium text-slate-700">Name</label>
             <input
@@ -111,14 +113,18 @@ export function ContactForm() {
             ) : null}
           </div>
         )}
-      />
+      </form.Field>
 
       <form.Field
         name="email"
         validators={{
-          onChange: z.string().email('Invalid email address')
+          onChange: ({ value }) => {
+             const result = z.string().email('Invalid email address').safeParse(value)
+             if (!result.success) return result.error.errors[0].message
+          }
         }}
-        children={(field) => (
+      >
+        {(field) => (
           <div className="space-y-1">
             <label htmlFor={field.name} className="text-xs font-medium text-slate-700">Work email</label>
             <input
@@ -138,14 +144,18 @@ export function ContactForm() {
             ) : null}
           </div>
         )}
-      />
+      </form.Field>
 
       <form.Field
         name="company"
         validators={{
-          onChange: z.string().min(1, 'Business name is required')
+          onChange: ({ value }) => {
+            const result = z.string().min(1, 'Business name is required').safeParse(value)
+            if (!result.success) return result.error.errors[0].message
+          }
         }}
-        children={(field) => (
+      >
+        {(field) => (
           <div className="space-y-1">
             <label htmlFor={field.name} className="text-xs font-medium text-slate-700">Business name</label>
             <input
@@ -164,14 +174,18 @@ export function ContactForm() {
             ) : null}
           </div>
         )}
-      />
+      </form.Field>
 
       <form.Field
         name="phone"
         validators={{
-          onChange: z.string().min(1, 'Phone number is required')
+          onChange: ({ value }) => {
+             const result = z.string().min(1, 'Phone number is required').safeParse(value)
+             if (!result.success) return result.error.errors[0].message
+          }
         }}
-        children={(field) => (
+      >
+        {(field) => (
           <div className="space-y-1">
             <label htmlFor={field.name} className="text-xs font-medium text-slate-700">Best phone number</label>
             <input
@@ -191,11 +205,12 @@ export function ContactForm() {
             ) : null}
           </div>
         )}
-      />
+      </form.Field>
 
       <form.Field
         name="typeOfBusiness"
-        children={(field) => (
+      >
+        {(field) => (
           <div className="space-y-1">
             <label htmlFor={field.name} className="text-xs font-medium text-slate-700">
               Type of business <span className="text-slate-400">(Optional)</span>
@@ -211,11 +226,12 @@ export function ContactForm() {
             />
           </div>
         )}
-      />
+      </form.Field>
 
       <form.Field
         name="estimatedMissedCalls"
-        children={(field) => (
+      >
+        {(field) => (
           <div className="space-y-1">
             <label htmlFor={field.name} className="text-xs font-medium text-slate-700">
               Estimated missed calls/leads per month <span className="text-slate-400">Optional</span>
@@ -231,11 +247,12 @@ export function ContactForm() {
             />
           </div>
         )}
-      />
+      </form.Field>
 
       <form.Field
         name="message"
-        children={(field) => (
+      >
+        {(field) => (
           <div className="space-y-1">
             <label htmlFor={field.name} className="text-xs font-medium text-slate-700">
               Anything else we should know? <span className="text-slate-400">Optional</span>
@@ -252,7 +269,7 @@ export function ContactForm() {
             />
           </div>
         )}
-      />
+      </form.Field>
 
       {error ? (
         <div className="rounded-md bg-red-50 p-3 text-sm text-red-600">
@@ -261,12 +278,13 @@ export function ContactForm() {
       ) : null}
 
       <p className="text-[0.7rem] text-slate-400">
-        We'll never share your info or spam you.
+        We&apos;ll never share your info or spam you.
       </p>
 
       <form.Subscribe
         selector={(state) => [state.canSubmit, state.isSubmitting]}
-        children={([canSubmit, isSubmitting]) => (
+      >
+        {([canSubmit, isSubmitting]) => (
           <button 
             type="submit" 
             disabled={!canSubmit} 
@@ -275,7 +293,7 @@ export function ContactForm() {
             {isSubmitting ? 'Booking...' : 'Book a quick intro call'}
           </button>
         )}
-      />
+      </form.Subscribe>
 
       <p className="text-center text-[0.7rem] text-slate-400">
         This form starts a conversation. You decide after our first call whether ForgedLocal is a fit.

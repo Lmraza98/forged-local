@@ -103,7 +103,7 @@ export async function POST(request: Request) {
     const responseText = await response.text()
     try {
       responseData = JSON.parse(responseText)
-    } catch (e) {
+    } catch {
       responseData = responseText
     }
 
