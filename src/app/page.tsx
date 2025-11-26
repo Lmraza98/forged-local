@@ -1,4 +1,5 @@
 // app/page.tsx
+import HeroSection from '@/components/HeroSection';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -8,60 +9,6 @@ const jsonLd = {
   description:
     'ForgedLocal helps local service businesses capture every call and web lead with practical automation and AI-powered follow-up.',
 };
-
-// Simple inline icons – no extra libraries needed
-function IconPhone() {
-  return (
-    <svg
-      className="h-5 w-5"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.12.86.37 1.7.72 2.49a2 2 0 0 1-.45 2.18L8.5 9.5a15.24 15.24 0 0 0 6 6l1.11-1.33a2 2 0 0 1 2.18-.45c.79.35 1.63.6 2.49.72A2 2 0 0 1 22 16.92z" />
-    </svg>
-  );
-}
-
-function IconSparkles() {
-  return (
-    <svg
-      className="h-5 w-5"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M12 3l1.4 3.7L17 8.1l-3.6 1.4L12 13l-1.4-3.5L7 8.1l3.6-1.4L12 3z" />
-      <path d="M5 16l.7 1.8L8 18.5l-1.7.7L5 21l-.7-1.8L2.5 18.5l1.8-.7L5 16z" />
-      <path d="M19 14l.9 2.2L22 17l-2.1.8L19 20l-.9-2.2L16 17l2.1-.8L19 14z" />
-    </svg>
-  );
-}
-
-function IconChart() {
-  return (
-    <svg
-      className="h-5 w-5"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <line x1="4" y1="19" x2="20" y2="19" />
-      <rect x="6" y="12" width="2.5" height="5" />
-      <rect x="10.5" y="9" width="2.5" height="8" />
-      <rect x="15" y="6" width="2.5" height="11" />
-    </svg>
-  );
-}
 
 export default function HomePage() {
   return (
@@ -74,19 +21,33 @@ export default function HomePage() {
 
       <div className="flex min-h-screen flex-col bg-slate-50 text-slate-900">
         {/* HEADER */}
-        <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/90 backdrop-blur">
-          <nav className="container mx-auto flex items-center justify-between px-4 py-3 sm:py-4 lg:px-8">
-            <a href="/" className="flex items-center gap-2">
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-slate-900 text-xs font-semibold text-amber-300 ring-1 ring-amber-400/70">
-                FL
-              </span>
-              <span className="text-sm font-semibold tracking-tight sm:text-base">
-                ForgedLocal
-              </span>
+        <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/90 backdrop-blur h-16">
+          <nav className="container mx-auto flex items-center justify-between px-4 h-full lg:px-8">
+            <a href="/" className="flex items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 220 40"
+                width="220"
+                height="40"
+                role="img"
+                aria-label="ForgedLocal logo"
+                className="h-8 w-auto"
+              >
+                <text
+                  x="0"
+                  y="26"
+                  fontFamily="system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif"
+                  fontSize="22"
+                  fontWeight="700"
+                >
+                  <tspan fill="#0B1220">Forged</tspan>
+                  <tspan fill="#FBBF24" textDecoration="underline">Local</tspan>
+                </text>
+              </svg>
             </a>
 
             <div className="hidden items-center gap-6 text-xs font-medium text-slate-600 md:flex sm:text-sm">
-              <a href="#how-it-works" className="hover:text-slate-900">
+              <a href="/how-it-works" className="hover:text-slate-900">
                 How it works
               </a>
               <a href="#who-we-serve" className="hover:text-slate-900">
@@ -104,283 +65,124 @@ export default function HomePage() {
               href="#contact"
               className="inline-flex items-center rounded-full bg-amber-400 px-4 py-2 text-xs font-semibold text-slate-900 shadow-sm transition hover:bg-amber-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300 focus-visible:ring-offset-2 focus-visible:ring-offset-white sm:text-sm"
             >
-              Book a quick call
+              Book a quick intro call
             </a>
           </nav>
         </header>
 
         <main className="flex-1">
-          {/* HERO */}
-          <section
-            id="hero"
-            aria-labelledby="hero-heading"
-            className="relative overflow-hidden bg-slate-950 text-slate-50"
-          >
-            {/* Base gradient */}
-            <div
-              className="pointer-events-none absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950"
-              aria-hidden="true"
-            />
-
-            {/* New England outline in the background */}
-            <div
-              className="pointer-events-none absolute -right-40 -top-24 h-[420px] w-[420px] opacity-[0.14] mix-blend-screen"
-              aria-hidden="true"
-            >
-              {/* <Image
-                src="/new-england-outline.svg" // put your SVG here
-                alt=""
-                fill
-                className="object-contain drop-shadow-[0_0_30px_rgba(250,204,21,0.35)]"
-              /> */}
-            </div>
-
-            <div className="relative container mx-auto px-4 py-14 sm:px-6 sm:py-18 lg:flex lg:items-center lg:gap-16 lg:px-8 lg:py-20">
-              {/* LEFT COLUMN */}
-              <div className="max-w-xl space-y-6 lg:max-w-lg">
-                <p className="text-[0.7rem] font-semibold uppercase tracking-[0.25em] text-amber-300 sm:text-xs">
-                  Practical AI for local service businesses
-                </p>
-
-                <h1
-                  id="hero-heading"
-                  className="text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl"
-                >
-                  Stop losing local leads to missed calls.
-                </h1>
-
-                <p className="max-w-md text-sm text-slate-200 sm:text-base">
-                  ForgedLocal sits behind your existing business line so every call,
-                  voicemail, and web lead is captured and followed up - without changing
-                  the number on your trucks.
-                </p>
-
-                {/* Feature chips */}
-                <div className="grid gap-3 sm:grid-cols-3">
-                  <div className="flex items-start gap-2 rounded-2xl bg-slate-900/80 px-3 py-3">
-                    <span className="mt-0.5 rounded-full bg-slate-800 p-2 text-amber-300">
-                      {/* phone icon */}
-                      <svg
-                        className="h-4 w-4"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.7"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.12.86.37 1.7.72 2.49a2 2 0 0 1-.45 2.18L8.5 9.5a15.24 15.24 0 0 0 6 6l1.11-1.33a2 2 0 0 1 2.18-.45c.79.35 1.63.6 2.49.72A2 2 0 0 1 22 16.92z" />
-                      </svg>
-                    </span>
-                    <div className="text-xs">
-                      <p className="font-semibold text-slate-50">Capture every call</p>
-                      <p className="mt-1 text-slate-300">Missed calls & forms log automatically.</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2 rounded-2xl bg-slate-900/80 px-3 py-3">
-                    <span className="mt-0.5 rounded-full bg-slate-800 p-2 text-amber-300">
-                      {/* sparkles icon */}
-                      <svg
-                        className="h-4 w-4"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.7"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M12 3l1.4 3.7L17 8.1l-3.6 1.4L12 13l-1.4-3.5L7 8.1l3.6-1.4L12 3z" />
-                        <path d="M5 16l.7 1.8L8 18.5l-1.7.7L5 21l-.7-1.8L2.5 18.5l1.8-.7L5 16z" />
-                        <path d="M19 14l.9 2.2L22 17l-2.1.8L19 20l-.9-2.2L16 17l2.1-.8L19 14z" />
-                      </svg>
-                    </span>
-                    <div className="text-xs">
-                      <p className="font-semibold text-slate-50">Fast follow-up</p>
-                      <p className="mt-1 text-slate-300">Text back missed calls in minutes.</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2 rounded-2xl bg-slate-900/80 px-3 py-3">
-                    <span className="mt-0.5 rounded-full bg-slate-800 p-2 text-amber-300">
-                      {/* chart icon */}
-                      <svg
-                        className="h-4 w-4"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.7"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <line x1="4" y1="19" x2="20" y2="19" />
-                        <rect x="6" y="12" width="2.5" height="5" />
-                        <rect x="10.5" y="9" width="2.5" height="8" />
-                        <rect x="15" y="6" width="2.5" height="11" />
-                      </svg>
-                    </span>
-                    <div className="text-xs">
-                      <p className="font-semibold text-slate-50">See the impact</p>
-                      <p className="mt-1 text-slate-300">Track recovered jobs & revenue.</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* CTAs */}
-                <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center">
-                  <a
-                    href="#contact"
-                    className="inline-flex items-center justify-center rounded-full bg-amber-400 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-sm transition hover:bg-amber-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
-                  >
-                    Schedule a 15-minute intro
-                  </a>
-                  <a
-                    href="#how-it-works"
-                    className="inline-flex items-center justify-center rounded-full border border-slate-600 px-5 py-2.5 text-sm font-medium text-slate-50 transition hover:border-amber-300 hover:text-amber-200"
-                  >
-                    See how it works
-                  </a>
-                </div>
-              </div>
-
-              {/* RIGHT COLUMN – your “Today” mock card */}
-              <div className="mt-10 w-full max-w-md lg:mt-0 lg:flex-1">
-                <div className="rounded-3xl border border-slate-800 bg-slate-900/80 p-4 shadow-xl">
-                  <div className="mb-3 flex items-center justify-between text-xs text-slate-300">
-                    <span>Today</span>
-                    <span className="rounded-full bg-emerald-500/15 px-2 py-0.5 text-[0.7rem] text-emerald-300">
-                      3 missed calls
-                    </span>
-                  </div>
-
-                  <div className="space-y-3 text-xs">
-                    <div className="flex items-center justify-between rounded-2xl bg-slate-950/80 px-3 py-2.5">
-                      <div>
-                        <p className="font-semibold text-slate-50">New lead - web form</p>
-                        <p className="text-[0.7rem] text-slate-400">
-                          &quot;AC not working upstairs&quot;
-                        </p>
-                      </div>
-                      <span className="rounded-full bg-amber-400/20 px-2.5 py-1 text-[0.7rem] text-amber-200">
-                        Reply ready
-                      </span>
-                    </div>
-
-                    <div className="flex items-center justify-between rounded-2xl bg-slate-950/70 px-3 py-2.5">
-                      <div>
-                        <p className="font-semibold text-slate-50">Missed call - 9:12 am</p>
-                        <p className="text-[0.7rem] text-slate-400">Text follow-up sent</p>
-                      </div>
-                      <button className="rounded-full bg-slate-800 px-3 py-1 text-[0.7rem] text-slate-100">
-                        Call back
-                      </button>
-                    </div>
-
-                    <div className="flex items-center justify-between rounded-2xl bg-slate-950/70 px-3 py-2.5">
-                      <div>
-                        <p className="font-semibold text-slate-50">Missed call - 1:47 pm</p>
-                        <p className="text-[0.7rem] text-slate-400">Waiting for reply</p>
-                      </div>
-                      <span className="text-[0.7rem] text-slate-400">3 min ago</span>
-                    </div>
-
-                    <div className="rounded-2xl border border-amber-400/60 bg-slate-950/70 px-3 py-2.5 text-[0.7rem] text-slate-200">
-                      $750 average job × 2 recovered leads/month ≈{' '}
-                      <span className="font-semibold text-amber-300">
-                        $1,500 / month
-                      </span>{' '}
-                      in extra revenue.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
+          {/* HERO SECTION MOVED TO CLIENT COMPONENT */}
+          <HeroSection />
 
           {/* HOW IT WORKS – visual timeline, short text */}
           <section
             id="how-it-works"
-            className="border-b border-slate-200 bg-slate-50"
+            className="border-t border-slate-200/60 bg-white"
           >
-            <div className="container mx-auto px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
-              <div className="max-w-2xl">
-                <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-                  How ForgedLocal works
-                </h2>
-                <p className="mt-3 text-sm text-slate-600">
-                  Three steps. You keep your public number; we upgrade what happens behind it.
-                </p>
-              </div>
+            <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+              <h2 className="mb-4 text-center text-xl font-semibold tracking-tight sm:text-2xl">
+                How ForgedLocal works behind your existing number
+              </h2>
+              <p className="mb-6 text-center text-sm text-slate-600 sm:text-base">
+                Three parts working together so fewer calls slip through the cracks.
+              </p>
 
-              {/* Dark timeline card on light background */}
-              <div className="mt-8 rounded-3xl bg-gradient-to-r from-slate-900 via-slate-950 to-slate-900 p-[1px]">
-                <div className="flex flex-col gap-8 rounded-[1.7rem] bg-slate-950 px-6 py-7 text-slate-50 sm:px-8 sm:py-8 md:flex-row md:items-center md:gap-10">
-                  {/* Overview */}
-                  <div className="max-w-sm space-y-3">
-                    <span className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-3 py-1 text-[0.7rem] font-medium uppercase tracking-wide text-slate-300 ring-1 ring-slate-700">
-                      <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                      3-part call & lead system
-                    </span>
-                    <p className="text-sm text-slate-200">
-                      Phone, capture, and follow-up work together so missed calls turn into booked jobs instead
-                      of lost revenue.
-                    </p>
-                  </div>
-
-                  {/* Steps timeline */}
-                  <ol className="flex-1 space-y-4 md:flex md:items-start md:gap-6 md:space-y-0">
-                    {/* STEP 1 */}
-                    <li className="relative flex flex-1 gap-3">
-                      <div className="mt-0.5 flex flex-col items-center md:items-start">
-                        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-amber-300 text-xs font-semibold text-slate-950">
-                          1
-                        </span>
-                        <span className="hidden h-px flex-1 md:block md:w-20 md:bg-slate-700/70" />
-                      </div>
-                      <div className="text-sm">
-                        <p className="font-semibold text-slate-50">Connect your line</p>
-                        <p className="mt-1 text-xs text-slate-300">
-                          We link your existing business number to a VoIP/call system. Customers still dial the
-                          same digits.
-                        </p>
-                      </div>
-                    </li>
-
-                    {/* STEP 2 */}
-                    <li className="relative flex flex-1 gap-3">
-                      <div className="mt-0.5 flex flex-col items-center md:items-start">
-                        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-amber-300 text-xs font-semibold text-slate-950">
-                          2
-                        </span>
-                        <span className="hidden h-px flex-1 md:block md:w-20 md:bg-slate-700/70" />
-                      </div>
-                      <div className="text-sm">
-                        <p className="font-semibold text-slate-50">Capture every lead</p>
-                        <p className="mt-1 text-xs text-slate-300">
-                          Calls, voicemails, and website forms flow into one simple inbox with clear missed-call
-                          alerts.
-                        </p>
-                      </div>
-                    </li>
-
-                    {/* STEP 3 */}
-                    <li className="relative flex flex-1 gap-3">
-                      <div className="mt-0.5 flex flex-col items-center md:items-start">
-                        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-amber-300 text-xs font-semibold text-slate-950">
-                          3
-                        </span>
-                      </div>
-                      <div className="text-sm">
-                        <p className="font-semibold text-slate-50">Follow up & track</p>
-                        <p className="mt-1 text-xs text-slate-300">
-                          Quick replies, reminders, and basic reporting so you see extra jobs and monthly
-                          revenue gained.
-                        </p>
-                      </div>
-                    </li>
-                  </ol>
+              <div className="space-y-4 rounded-2xl bg-slate-900 p-5 text-slate-50 sm:flex sm:space-y-0 sm:space-x-6 sm:p-6">
+                {/* Overview */}
+                <div className="space-y-3 sm:max-w-[220px]">
+                  <span className="inline-flex items-center gap-2 rounded-full bg-slate-800 px-3 py-1 text-[0.7rem] font-medium uppercase tracking-wide text-slate-200">
+                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                    3-part call system
+                  </span>
+                  <p className="text-sm text-slate-200">
+                    Phone, capture, and follow-up work together so more missed calls turn into booked jobs.
+                  </p>
                 </div>
+
+                {/* Steps timeline */}
+                <ol className="flex-1 space-y-4 sm:flex sm:items-start sm:gap-6 sm:space-y-0">
+                  {/* STEP 1 */}
+                  <li className="flex flex-1 flex-col gap-3 rounded-2xl bg-slate-800/60 p-4">
+                    <div className="flex items-center gap-2">
+                      {/* Plug icon */}
+                      <svg
+                        className="h-5 w-5 text-amber-300"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M12 22v-5M9 8V2M15 8V2M6 12h12a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2z" />
+                      </svg>
+                      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-amber-300 text-xs font-semibold text-slate-950">
+                        1
+                      </span>
+                    </div>
+                    <div className="text-sm">
+                      <p className="font-semibold text-slate-50">Connect your line</p>
+                      <p className="mt-1 text-xs text-slate-300">
+                        We plug your existing number into a call and text system. Customers still dial the same digits.
+                      </p>
+                    </div>
+                  </li>
+
+                  {/* STEP 2 */}
+                  <li className="flex flex-1 flex-col gap-3 rounded-2xl bg-slate-800/60 p-4">
+                    <div className="flex items-center gap-2">
+                      {/* Inbox icon */}
+                      <svg
+                        className="h-5 w-5 text-amber-300"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                        <polyline points="22,6 12,13 2,6" />
+                      </svg>
+                      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-amber-300 text-xs font-semibold text-slate-950">
+                        2
+                      </span>
+                    </div>
+                    <div className="text-sm">
+                      <p className="font-semibold text-slate-50">Capture every attempt</p>
+                      <p className="mt-1 text-xs text-slate-300">
+                        Calls, voicemails, and website forms land in one inbox with clear missed-call alerts.
+                      </p>
+                    </div>
+                  </li>
+
+                  {/* STEP 3 */}
+                  <li className="flex flex-1 flex-col gap-3 rounded-2xl bg-slate-800/60 p-4">
+                    <div className="flex items-center gap-2">
+                      {/* Chart/checkmark icon */}
+                      <svg
+                        className="h-5 w-5 text-amber-300"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-amber-300 text-xs font-semibold text-slate-950">
+                        3
+                      </span>
+                    </div>
+                    <div className="text-sm">
+                      <p className="font-semibold text-slate-50">Follow up and track</p>
+                      <p className="mt-1 text-xs text-slate-300">
+                        Fast replies, reminders, and light reporting so more calls turn into booked jobs instead of lost revenue.
+                      </p>
+                    </div>
+                  </li>
+                </ol>
               </div>
             </div>
           </section>
@@ -389,55 +191,71 @@ export default function HomePage() {
           {/* WHO WE SERVE – two cards, minimal copy */}
           <section
             id="who-we-serve"
-            className="border-b border-slate-200 bg-white"
+            className="border-t border-slate-200/60 bg-white relative overflow-hidden"
           >
-            <div className="container mx-auto px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
-              <div className="max-w-2xl space-y-3">
-                <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+            {/* New England map outline - faint background on larger screens */}
+            <div
+              className="pointer-events-none absolute inset-0 hidden opacity-[0.03] sm:block"
+              aria-hidden="true"
+            >
+              <svg
+                className="h-full w-full"
+                viewBox="0 0 400 300"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                {/* Simplified New England outline */}
+                <path
+                  d="M50 50 L150 30 L250 40 L320 60 L350 100 L340 150 L300 200 L200 220 L100 200 L40 150 Z"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  className="text-slate-900"
+                />
+              </svg>
+            </div>
+            <div className="relative mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+              <div className="mx-auto max-w-2xl text-center">
+                <h2 className="mb-3 text-xl font-semibold tracking-tight sm:text-2xl">
                   Who ForgedLocal is for
                 </h2>
-                <p className="text-sm text-slate-600">
-                  We focus on local service contractors with a real business line and a steady flow of calls.
+                <p className="mb-6 rounded-xl px-4 py-4 text-sm text-slate-600 sm:rounded-none sm:px-0 sm:py-0 sm:text-base">
+                  We focus on contractors and home service teams in Southern New Hampshire with a real business line and steady call volume.
                 </p>
-                <span className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 text-[0.7rem] font-medium uppercase tracking-wide text-slate-700">
-                  {/* simple “pin” icon */}
-                  <svg
-                    className="h-3.5 w-3.5"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M12 21s7-5.1 7-11a7 7 0 0 0-14 0c0 5.9 7 11 7 11z" />
-                    <circle cx="12" cy="10" r="2.6" />
-                  </svg>
-                  New England service businesses first
-                </span>
+                <div className="flex justify-center">
+                  <span className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 text-[0.7rem] font-medium uppercase tracking-wide text-slate-700">
+                    {/* simple "pin" icon */}
+                    <svg
+                      className="h-3.5 w-3.5"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M12 21s7-5.1 7-11a7 7 0 0 0-14 0c0 5.9 7 11 7 11z" />
+                      <circle cx="12" cy="10" r="2.6" />
+                    </svg>
+                    New England service businesses first
+                  </span>
+                </div>
               </div>
 
-              <div className="mt-8 grid gap-6 lg:grid-cols-[1.15fr,0.85fr]">
+              <div className="mx-auto mt-8 max-w-md">
                 {/* GREAT FIT */}
-                <div className="flex flex-col gap-4 rounded-3xl border border-amber-200 bg-amber-50 px-6 py-6 sm:px-7 sm:py-7">
-                  <div className="flex items-center justify-between gap-2">
-                    <div>
-                      <p className="text-xs font-semibold uppercase tracking-wide text-amber-800">
-                        Great fit
-                      </p>
-                      <p className="mt-1 text-sm font-semibold text-amber-900">
-                        HVAC, roofing, landscaping, plumbing, electrical, and similar shops with:
-                      </p>
-                    </div>
-                    <span className="inline-flex items-center rounded-full bg-amber-100 px-3 py-1 text-[0.7rem] font-medium text-amber-800">
-                      Ready to tighten up leads
-                    </span>
-                  </div>
+                <div className="space-y-3 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-sm text-slate-800 shadow-sm">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-amber-800">
+                    Great fit for
+                  </p>
 
-                  <ul className="space-y-2 text-sm text-amber-900/90">
+                  <ul className="space-y-2 text-amber-900/90">
                     <li className="flex items-start gap-2">
                       <span className="mt-1 h-1.5 w-1.5 rounded-full bg-amber-700" />
-                      <span>Office phone number already in use (not just a personal cell).</span>
+                      <span>HVAC, roofing, landscaping, plumbing, electrical, and similar shops.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-1 h-1.5 w-1.5 rounded-full bg-amber-700" />
+                      <span>Office number already in use (not just a personal cell).</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="mt-1 h-1.5 w-1.5 rounded-full bg-amber-700" />
@@ -449,34 +267,27 @@ export default function HomePage() {
                     </li>
                   </ul>
 
-                  <p className="mt-1 text-xs text-amber-900/80">
-                    You keep the number on your trucks, cards, and website. We add the intelligence behind it.
+                  <p className="mt-2 text-xs text-amber-900/80">
+                    You keep the number on your trucks, cards, and website. We add the system behind it.
                   </p>
                 </div>
 
-                {/* NOT IDEAL */}
-                <div className="flex flex-col gap-3 rounded-3xl border border-slate-200 bg-slate-50 px-6 py-6 sm:px-7 sm:py-7">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-700">
-                    Not ideal (for now)
-                  </p>
-                  <ul className="space-y-2 text-sm text-slate-600">
-                    <li className="flex items-start gap-2">
-                      <span className="mt-1 h-1.5 w-1.5 rounded-full bg-slate-400" />
-                      <span>One-person operators using only a personal cell for everything.</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="mt-1 h-1.5 w-1.5 rounded-full bg-slate-400" />
-                      <span>Owners unwilling to route their existing number through a VoIP/call system.</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="mt-1 h-1.5 w-1.5 rounded-full bg-slate-400" />
-                      <span>Businesses that do not want to adjust any call or lead-handling process.</span>
-                    </li>
-                  </ul>
-                  <p className="mt-1 text-xs text-slate-500">
-                    ForgedLocal is for teams that want cleaner lead handling without adding more software work
-                    to their plate.
-                  </p>
+                {/* NOT A FIT */}
+                <div className="mt-4 flex items-center justify-center gap-2 text-center text-xs text-slate-500">
+                  <svg
+                    className="h-4 w-4 text-slate-400"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="8" x2="12" y2="12" />
+                    <line x1="12" y1="16" x2="12.01" y2="16" />
+                  </svg>
+                  <span>Not a fit if you only take a few calls a month or run everything from a personal cell phone.</span>
                 </div>
               </div>
             </div>
@@ -486,187 +297,213 @@ export default function HomePage() {
           {/* PRICING – single card */}
           <section
             id="pricing"
-            className="border-b border-slate-200 bg-slate-50"
+            className="border-t border-slate-200/60 bg-white"
           >
-            <div className="container mx-auto px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
-              <div className="max-w-2xl">
-                <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-                  Simple engagement, clear pricing
-                </h2>
-                <p className="mt-3 text-sm text-slate-600">
-                  No generic SaaS seat pricing. We scope around your numbers.
-                </p>
-              </div>
+            <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+              <h2 className="mb-3 text-center text-xl font-semibold tracking-tight sm:text-2xl">
+                Simple engagement, clear pricing
+              </h2>
+              <p className="mb-6 text-center text-sm text-slate-600 sm:text-base">
+                No generic SaaS seat pricing. We scope around your numbers.
+              </p>
 
-              <div className="mt-8 max-w-3xl rounded-2xl border border-amber-200 bg-white p-6 shadow-sm">
-                <p className="text-sm font-semibold text-slate-900">
-                  What you get:
-                </p>
-                <ul className="mt-3 space-y-1.5 text-sm text-slate-600">
-                  <li>Done-for-you setup and call-flow design</li>
-                  <li>Connection to your existing number/VoIP where possible</li>
-                  <li>Ongoing tuning as we see how leads behave</li>
+              <div className="mx-auto max-w-md rounded-2xl border border-amber-100 bg-amber-50 p-5 shadow-sm">
+                <div className="mb-4 flex items-center gap-2">
+                  <svg
+                    className="h-5 w-5 text-amber-600"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  </svg>
+                  <p className="text-sm font-semibold text-slate-900">
+                    Done-for-you system setup
+                  </p>
+                </div>
+                <ul className="space-y-2 text-sm text-slate-700">
+                  <li className="flex items-start gap-2">
+                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-amber-600" />
+                    <span>Done-for-you setup and call-flow design.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-amber-600" />
+                    <span>Connection to your existing number or VoIP where possible.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-amber-600" />
+                    <span>Ongoing tuning as we see how leads behave.</span>
+                  </li>
                 </ul>
-                <p className="mt-3 text-sm text-slate-600">
-                  On our intro call we estimate average job value, realistic
-                  missed leads, and potential extra revenue. Pricing is designed
-                  to stay well below that recovered amount.
+                <p className="mt-3 text-sm text-slate-700">
+                  On our intro call we estimate average job value, realistic missed leads, and potential extra revenue.
+                  Pricing stays well below the recovered amount.
+                </p>
+                <p className="mt-3 text-[0.75rem] text-slate-500">
+                  Most clients start with a one-time setup plus a simple monthly service, no long contracts.
                 </p>
                 <a
                   href="#contact"
-                  className="mt-5 inline-flex items-center rounded-full bg-amber-400 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-sm transition hover:bg-amber-300"
+                  className="mt-5 inline-flex w-full justify-center rounded-full bg-amber-400 px-4 py-3 text-sm font-semibold text-slate-950 shadow-sm transition hover:bg-amber-300"
                 >
-                  Talk about your numbers
+                  Book a quick intro call
                 </a>
               </div>
             </div>
           </section>
 
-          {/* CONTACT – form unchanged structurally, just fits new palette */}
+          {/* CONTACT – tightened form */}
           <section
             id="contact"
-            className="bg-white"
+            className="border-t border-slate-200/60 bg-white"
           >
-            <div className="container mx-auto px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
-              <div className="max-w-2xl">
-                <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-                  Start a conversation
-                </h2>
-                <p className="mt-3 text-sm text-slate-600">
-                  Share a few details. We&apos;ll reply with a time for a quick,
-                  no-pressure intro call.
-                </p>
-              </div>
+            <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+              <h2 className="mb-3 text-center text-xl font-semibold tracking-tight sm:text-2xl">
+                Start a conversation
+              </h2>
+              <p className="mb-6 text-center text-sm text-slate-600 sm:text-base">
+                Share a few details. We will reply with a time for a quick, no-pressure intro call.
+              </p>
 
-              <div className="mt-8 max-w-3xl">
-                <form
-                  action="/api/contact"
-                  method="POST"
-                  className="grid gap-6 md:grid-cols-2"
+              <form
+                action="/api/contact"
+                method="POST"
+                className="mx-auto max-w-md space-y-4"
+              >
+                <div className="space-y-1">
+                  <label
+                    htmlFor="name"
+                    className="text-xs font-medium text-slate-700"
+                  >
+                    Name
+                  </label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400"
+                    placeholder="Jane Contractor"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label
+                    htmlFor="email"
+                    className="text-xs font-medium text-slate-700"
+                  >
+                    Work email
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400"
+                    placeholder="you@example.com"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label
+                    htmlFor="businessName"
+                    className="text-xs font-medium text-slate-700"
+                  >
+                    Business name
+                  </label>
+                  <input
+                    id="businessName"
+                    name="businessName"
+                    type="text"
+                    required
+                    className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400"
+                    placeholder="Forged Plumbing & HVAC"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label
+                    htmlFor="phone"
+                    className="text-xs font-medium text-slate-700"
+                  >
+                    Best phone number
+                  </label>
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    required
+                    className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400"
+                    placeholder="(555) 123-4567"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label
+                    htmlFor="businessType"
+                    className="text-xs font-medium text-slate-700"
+                  >
+                    Type of business <span className="text-slate-400">(Optional)</span>
+                  </label>
+                  <input
+                    id="businessType"
+                    name="businessType"
+                    type="text"
+                    className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400"
+                    placeholder="HVAC, roofing, landscaping, plumbing, etc."
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label
+                    htmlFor="missedLeads"
+                    className="text-xs font-medium text-slate-700"
+                  >
+                    Estimated missed calls/leads per month <span className="text-slate-400">Optional</span>
+                  </label>
+                  <input
+                    id="missedLeads"
+                    name="missedLeads"
+                    type="text"
+                    className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-700 placeholder:text-slate-400"
+                    placeholder="Example: 5–15"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label
+                    htmlFor="message"
+                    className="text-xs font-medium text-slate-700"
+                  >
+                    Anything else we should know? <span className="text-slate-400">Optional</span>
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={4}
+                    className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-700 placeholder:text-slate-400"
+                    placeholder="Current phone setup, missed leads, or what you would like to improve."
+                  />
+                </div>
+                <p className="text-[0.7rem] text-slate-400">
+                  We&apos;ll never share your info or spam you.
+                </p>
+                <button
+                  type="submit"
+                  className="inline-flex w-full justify-center rounded-full bg-amber-400 px-4 py-3 text-sm font-semibold text-slate-950 shadow-sm transition hover:bg-amber-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
                 >
-                  <div>
-                    <label
-                      htmlFor="name"
-                      className="block text-xs font-medium uppercase tracking-wide text-slate-700"
-                    >
-                      Name
-                    </label>
-                    <input
-                      id="name"
-                      name="name"
-                      type="text"
-                      required
-                      className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400"
-                      placeholder="Jane Contractor"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-xs font-medium uppercase tracking-wide text-slate-700"
-                    >
-                      Work email
-                    </label>
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-                      className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400"
-                      placeholder="you@example.com"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="businessName"
-                      className="block text-xs font-medium uppercase tracking-wide text-slate-700"
-                    >
-                      Business name
-                    </label>
-                    <input
-                      id="businessName"
-                      name="businessName"
-                      type="text"
-                      required
-                      className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
-                      placeholder="Forged Plumbing & HVAC"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="phone"
-                      className="block text-xs font-medium uppercase tracking-wide text-slate-700"
-                    >
-                      Best phone number
-                    </label>
-                    <input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      required
-                      className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
-                      placeholder="(555) 123-4567"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="businessType"
-                      className="block text-xs font-medium uppercase tracking-wide text-slate-700"
-                    >
-                      Type of business
-                    </label>
-                    <input
-                      id="businessType"
-                      name="businessType"
-                      type="text"
-                      className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
-                      placeholder="HVAC, roofing, landscaping, plumbing, etc."
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="missedLeads"
-                      className="block text-xs font-medium uppercase tracking-wide text-slate-700"
-                    >
-                      Estimated missed calls/leads per month
-                    </label>
-                    <input
-                      id="missedLeads"
-                      name="missedLeads"
-                      type="text"
-                      className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
-                      placeholder="Example: 5–15"
-                    />
-                  </div>
-                  <div className="md:col-span-2">
-                    <label
-                      htmlFor="message"
-                      className="block text-xs font-medium uppercase tracking-wide text-slate-700"
-                    >
-                      Anything else we should know?
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={4}
-                      className="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
-                      placeholder="Current phone setup, missed leads, or what you’d like to improve."
-                    />
-                  </div>
-                  <div className="md:col-span-2">
-                    <button
-                      type="submit"
-                      className="inline-flex items-center justify-center rounded-full bg-amber-400 px-6 py-2.5 text-sm font-semibold text-slate-950 shadow-sm transition hover:bg-amber-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-                    >
-                      Request a quick intro
-                    </button>
-                    <p className="mt-3 text-xs text-slate-500">
-                      This form starts a conversation. You decide after our
-                      first call whether ForgedLocal is a fit.
-                    </p>
-                  </div>
-                </form>
-              </div>
+                  Book a quick intro call
+                </button>
+                <p className="text-center text-[0.7rem] text-slate-400">
+                  This form starts a conversation. You decide after our first call whether ForgedLocal is a fit.
+                </p>
+              </form>
+            </div>
+          </section>
+
+          {/* TRUST SECTION */}
+          <section className="border-t border-slate-200/60 bg-[#F7F8FC]">
+            <div className="container mx-auto px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+              <p className="mx-auto max-w-2xl text-center text-sm text-slate-600">
+                Built for New England contractors who live on the phone - not software companies.
+              </p>
             </div>
           </section>
         </main>
@@ -675,7 +512,7 @@ export default function HomePage() {
           <div className="container mx-auto flex flex-col items-start justify-between gap-4 px-4 py-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:px-6 lg:px-8">
             <p>© 2025 ForgedLocal. All rights reserved.</p>
             <div className="flex flex-wrap gap-4">
-              <a href="#how-it-works" className="hover:text-slate-800">
+              <a href="/how-it-works" className="hover:text-slate-800">
                 How it works
               </a>
               <a href="#who-we-serve" className="hover:text-slate-800">
