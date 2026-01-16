@@ -2,7 +2,8 @@ import './globals.css'
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import { DM_Sans } from 'next/font/google'
-import { Analytics, GTMNoScript } from '@/components/Analytics'
+import { Analytics as CustomAnalytics, GTMNoScript } from '@/components/Analytics'
+import { Analytics } from '@vercel/analytics/react'
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -63,11 +64,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={dmSans.variable}>
       <head>
-        <Analytics />
+        <CustomAnalytics />
       </head>
       <body className="bg-[#FFFDF8] text-slate-900 antialiased font-sans">
         <GTMNoScript />
         {children}
+        <Analytics />
       </body>
     </html>
   )
