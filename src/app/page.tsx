@@ -192,7 +192,7 @@ export default function HomePage() {
             />
 
             {/* Radial glow */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-amber-500/10 rounded-full blur-3xl" />
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-amber-500/[0.07] rounded-full blur-3xl" />
 
             <div className="relative container mx-auto px-4 py-20 sm:py-28 lg:py-36 lg:px-8">
               <div className="mx-auto max-w-4xl text-center">
@@ -209,7 +209,7 @@ export default function HomePage() {
                 <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl">
                   That missed call?
                   <br />
-                  <span className="text-amber-400">It just cost you $800.</span>
+                  <span className="text-amber-300">It just cost you $800.</span>
                 </h1>
 
                 <p className="mt-6 text-lg text-slate-300 sm:text-xl max-w-2xl mx-auto leading-relaxed">
@@ -220,11 +220,11 @@ export default function HomePage() {
                 {/* Stats */}
                 <div className="mt-12 grid grid-cols-3 gap-6 max-w-xl mx-auto">
                   <div className="text-center">
-                    <div className="text-4xl font-bold text-amber-400">27%</div>
+                    <div className="text-4xl font-bold text-amber-300">27%</div>
                     <div className="text-sm text-slate-400 mt-1">Calls Missed</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-4xl font-bold text-amber-400">60s</div>
+                    <div className="text-4xl font-bold text-amber-300">60s</div>
                     <div className="text-sm text-slate-400 mt-1">Auto Text-Back</div>
                   </div>
                   <div className="text-center">
@@ -239,7 +239,7 @@ export default function HomePage() {
                     href="https://calendly.com/YOUR_CALENDLY_URL"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-full bg-amber-500 px-8 py-4 text-base font-bold text-white shadow-xl shadow-amber-500/30 transition hover:bg-amber-400 hover:shadow-amber-400/40 hover:scale-105"
+                    className="inline-flex items-center justify-center rounded-full bg-amber-500 px-8 py-4 text-base font-bold text-white shadow-xl shadow-amber-500/20 transition hover:bg-amber-400 hover:shadow-amber-400/30 hover:scale-105"
                   >
                     <svg className="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />

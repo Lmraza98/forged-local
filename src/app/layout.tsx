@@ -49,7 +49,10 @@ export const metadata: Metadata = {
     canonical: 'https://forgedlocal.com',
   },
   icons: {
-    icon: '/favicon.svg',
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/apple-icon.svg',
   },
   verification: {
     google: 'your-google-verification-code', // Add your Google Search Console verification
