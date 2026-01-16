@@ -2,6 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import { DM_Sans } from 'next/font/google'
+import { Analytics, GTMNoScript } from '@/components/Analytics'
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -58,7 +59,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={dmSans.variable}>
+      <head>
+        <Analytics />
+      </head>
       <body className="bg-[#FFFDF8] text-slate-900 antialiased font-sans">
+        <GTMNoScript />
         {children}
       </body>
     </html>

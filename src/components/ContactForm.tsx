@@ -2,11 +2,17 @@
 
 import * as React from 'react'
 import { useForm } from '@tanstack/react-form'
+import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 
-export function ContactForm() {
+interface ContactFormProps {
+  redirectToThankYou?: boolean
+}
+
+export function ContactForm({ redirectToThankYou = true }: ContactFormProps) {
   const [isSubmitted, setIsSubmitted] = React.useState(false)
   const [error, setError] = React.useState<string | null>(null)
+  const router = useRouter()
 
   const form = useForm({
     defaultValues: {
@@ -48,7 +54,21 @@ export function ContactForm() {
           throw new Error('Submission failed')
         }
 
-        setIsSubmitted(true)
+        // Track conversion in GTM/GA4
+        if (typeof window !== 'undefined' && (window as Window & { dataLayer?: unknown[] }).dataLayer) {
+          (window as Window & { dataLayer?: unknown[] }).dataLayer?.push({
+            event: 'form_submit',
+            form_name: 'contact_form',
+            form_destination: 'hubspot'
+          })
+        }
+
+        // Redirect to thank-you page or show success state
+        if (redirectToThankYou) {
+          router.push('/thank-you')
+        } else {
+          setIsSubmitted(true)
+        }
       } catch (err) {
         console.error(err)
         setError('Something went wrong. Please email us directly.')
@@ -317,8 +337,10 @@ export function ContactForm() {
         )}
       </form.Subscribe>
 
-      <p className="text-center text-xs text-slate-400">
-        No spam. We&apos;ll reach out within 24 hours to schedule a quick call.
+      <p className="text-center text-xs text-slate-400 leading-relaxed">
+        By submitting, you agree to receive calls/texts from ForgedLocal. 
+        Msg frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out. 
+        See <a href="/sms-consent" className="underline hover:text-amber-400">SMS Terms</a>, <a href="/terms" className="underline hover:text-amber-400">Terms</a> &amp; <a href="/privacy" className="underline hover:text-amber-400">Privacy</a>.
       </p>
     </form>
   )

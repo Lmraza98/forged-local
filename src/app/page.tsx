@@ -142,24 +142,37 @@ export default function HomePage() {
               </span>
             </Link>
 
-            <div className="hidden items-center gap-8 md:flex">
+            <div className="hidden items-center gap-6 md:flex">
               <Link href="#how-it-works" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">
                 How It Works
               </Link>
-              <Link href="#industries" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">
-                Industries
+              <Link href="#calculator" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">
+                Calculator
               </Link>
               <Link href="#pricing" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">
                 Pricing
               </Link>
             </div>
 
-            <Link
-              href="#contact"
-              className="inline-flex items-center rounded-full bg-amber-500 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-amber-500/25 transition hover:bg-amber-600 hover:shadow-amber-500/40 hover:scale-105"
-            >
-              Get Free Quote
-            </Link>
+            <div className="flex items-center gap-3">
+              <Link
+                href="#contact"
+                className="hidden sm:inline-flex items-center rounded-full border-2 border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-amber-500 hover:text-amber-600"
+              >
+                Get Quote
+              </Link>
+              <a
+                href="https://calendly.com/YOUR_CALENDLY_URL"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center rounded-full bg-amber-500 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-amber-500/25 transition hover:bg-amber-600 hover:shadow-amber-500/40 hover:scale-105"
+              >
+                <svg className="mr-1.5 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                Book Setup Call
+              </a>
+            </div>
           </nav>
         </header>
 
@@ -222,22 +235,29 @@ export default function HomePage() {
 
                 {/* CTA buttons */}
                 <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
-                  <Link
-                    href="#contact"
+                  <a
+                    href="https://calendly.com/YOUR_CALENDLY_URL"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center justify-center rounded-full bg-amber-500 px-8 py-4 text-base font-bold text-white shadow-xl shadow-amber-500/30 transition hover:bg-amber-400 hover:shadow-amber-400/40 hover:scale-105"
                   >
-                    Stop Losing Jobs Today
-                    <svg className="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    <svg className="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
-                  </Link>
+                    Book 10-Min Setup Call
+                  </a>
                   <Link
-                    href="#how-it-works"
+                    href="#contact"
                     className="inline-flex items-center justify-center rounded-full border-2 border-slate-600 px-8 py-4 text-base font-semibold text-slate-300 transition hover:border-white hover:text-white"
                   >
-                    See How It Works
+                    Get Free Quote Instead
                   </Link>
                 </div>
+                
+                {/* Trust line */}
+                <p className="mt-6 text-sm text-slate-400">
+                  No contracts. Cancel anytime. Turn it off instantly by removing call forwarding.
+                </p>
               </div>
             </div>
 
@@ -447,55 +467,126 @@ export default function HomePage() {
           {/* PRICING */}
           <section id="pricing" className="bg-[#FFFDF8] py-20 sm:py-28">
             <div className="container mx-auto px-4 lg:px-8">
-              <div className="mx-auto max-w-4xl">
+              <div className="mx-auto max-w-5xl">
                 <div className="text-center mb-12">
                   <span className="inline-block rounded-full bg-amber-100 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-amber-700 mb-6">
                     Pricing
                   </span>
                   <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">
-                    Costs less than one lost job
+                    Start with a 14-day pilot. No risk.
                   </h2>
                   <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
-                    No generic SaaS pricing. We scope around your call volume and make sure you see ROI.
+                    Setup fee waived for your pilot. See real results before you commit.
                   </p>
                 </div>
 
-                <div className="rounded-3xl border-2 border-amber-200 bg-white p-8 sm:p-12 shadow-xl shadow-amber-500/5">
-                  <div className="grid md:grid-cols-2 gap-12 items-center">
-                    <div>
-                      <h3 className="text-2xl font-bold text-slate-900 mb-4">Done-for-you setup</h3>
-                      <ul className="space-y-4">
-                        {[
-                          'Call forwarding configured for you',
-                          'Custom auto-reply message',
-                          'Unified inbox for all leads',
-                          'Emergency keyword flagging',
-                          'Monthly performance reports',
-                          'Ongoing optimization'
-                        ].map((item, i) => (
-                          <li key={i} className="flex items-center gap-3">
-                            <svg className="h-5 w-5 text-emerald-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span className="text-slate-700">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
+                {/* Pilot Offer Banner */}
+                <div className="mb-8 rounded-2xl bg-gradient-to-r from-emerald-500 to-emerald-600 p-6 text-center text-white">
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <div className="flex items-center gap-2">
+                      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span className="font-bold text-lg">14-Day Pilot:</span>
                     </div>
-                    <div className="text-center md:text-left">
-                      <p className="text-sm font-medium text-slate-500 mb-2">Starting at</p>
-                      <div className="text-5xl font-bold text-slate-900 mb-2">$149<span className="text-2xl font-normal text-slate-500">/mo</span></div>
-                      <p className="text-sm text-slate-500 mb-8">+ one-time setup fee</p>
-                      <Link
-                        href="#contact"
-                        className="inline-flex w-full md:w-auto items-center justify-center rounded-full bg-amber-500 px-8 py-4 text-base font-bold text-white shadow-lg shadow-amber-500/25 transition hover:bg-amber-600"
-                      >
-                        Get Your Custom Quote
-                      </Link>
-                      <p className="mt-4 text-xs text-slate-500">No contracts. Cancel anytime.</p>
-                    </div>
+                    <span className="text-emerald-100">Setup fee waived • Full features • Cancel if not satisfied</span>
                   </div>
                 </div>
+
+                {/* Pricing Tiers */}
+                <div className="grid md:grid-cols-3 gap-6">
+                  {/* Starter */}
+                  <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                    <h3 className="text-lg font-bold text-slate-900 mb-2">Starter</h3>
+                    <p className="text-sm text-slate-500 mb-4">For solo operators</p>
+                    <div className="mb-6">
+                      <span className="text-4xl font-bold text-slate-900">$149</span>
+                      <span className="text-slate-500">/mo</span>
+                    </div>
+                    <ul className="space-y-3 mb-6 text-sm">
+                      {['Up to 50 calls/month', 'Missed call text-back', 'Basic inbox', 'Email support'].map((item, i) => (
+                        <li key={i} className="flex items-center gap-2 text-slate-600">
+                          <svg className="h-4 w-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                    <a
+                      href="https://calendly.com/YOUR_CALENDLY_URL"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full rounded-full border-2 border-slate-200 py-3 text-center text-sm font-semibold text-slate-700 transition hover:border-amber-500 hover:text-amber-600"
+                    >
+                      Start Pilot
+                    </a>
+                  </div>
+
+                  {/* Growth - Featured */}
+                  <div className="rounded-2xl border-2 border-amber-500 bg-white p-6 shadow-xl shadow-amber-500/10 relative">
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-amber-500 px-3 py-1 text-xs font-bold text-white">
+                      MOST POPULAR
+                    </div>
+                    <h3 className="text-lg font-bold text-slate-900 mb-2">Growth</h3>
+                    <p className="text-sm text-slate-500 mb-4">For growing teams</p>
+                    <div className="mb-6">
+                      <span className="text-4xl font-bold text-slate-900">$299</span>
+                      <span className="text-slate-500">/mo</span>
+                    </div>
+                    <ul className="space-y-3 mb-6 text-sm">
+                      {['Up to 150 calls/month', 'Everything in Starter', 'Emergency keyword flagging', 'Performance reports', 'Priority support'].map((item, i) => (
+                        <li key={i} className="flex items-center gap-2 text-slate-600">
+                          <svg className="h-4 w-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                    <a
+                      href="https://calendly.com/YOUR_CALENDLY_URL"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full rounded-full bg-amber-500 py-3 text-center text-sm font-bold text-white shadow-lg shadow-amber-500/25 transition hover:bg-amber-600"
+                    >
+                      Start Pilot
+                    </a>
+                  </div>
+
+                  {/* Scale */}
+                  <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                    <h3 className="text-lg font-bold text-slate-900 mb-2">Scale</h3>
+                    <p className="text-sm text-slate-500 mb-4">For multi-line operations</p>
+                    <div className="mb-6">
+                      <span className="text-4xl font-bold text-slate-900">$499</span>
+                      <span className="text-slate-500">/mo</span>
+                    </div>
+                    <ul className="space-y-3 mb-6 text-sm">
+                      {['Unlimited calls', 'Everything in Growth', 'Multiple lines/locations', 'Custom integrations', 'Dedicated account manager'].map((item, i) => (
+                        <li key={i} className="flex items-center gap-2 text-slate-600">
+                          <svg className="h-4 w-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                    <a
+                      href="https://calendly.com/YOUR_CALENDLY_URL"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full rounded-full border-2 border-slate-200 py-3 text-center text-sm font-semibold text-slate-700 transition hover:border-amber-500 hover:text-amber-600"
+                    >
+                      Start Pilot
+                    </a>
+                  </div>
+                </div>
+
+                {/* Trust line */}
+                <p className="mt-8 text-center text-sm text-slate-500">
+                  No contracts. No setup fee for pilots. Cancel anytime by removing call forwarding.
+                </p>
               </div>
             </div>
           </section>
@@ -628,12 +719,20 @@ export default function HomePage() {
                   <li><Link href="/how-it-works" className="text-slate-400 hover:text-amber-400 transition">How It Works</Link></li>
                   <li><Link href="#pricing" className="text-slate-400 hover:text-amber-400 transition">Pricing</Link></li>
                   <li><Link href="#contact" className="text-slate-400 hover:text-amber-400 transition">Contact</Link></li>
+                  <li><Link href="/terms" className="text-slate-400 hover:text-amber-400 transition">Terms of Service</Link></li>
+                  <li><Link href="/privacy" className="text-slate-400 hover:text-amber-400 transition">Privacy Policy</Link></li>
+                  <li><Link href="/sms-consent" className="text-slate-400 hover:text-amber-400 transition">SMS Terms</Link></li>
                 </ul>
               </div>
             </div>
             
-            <div className="mt-12 pt-8 border-t border-slate-800 text-center text-sm text-slate-500">
-              © 2025 ForgedLocal. All rights reserved. Serving contractors in New Hampshire.
+            <div className="mt-12 pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500">
+              <p>© 2025 ForgedLocal. All rights reserved.</p>
+              <div className="flex gap-4">
+                <Link href="/terms" className="hover:text-amber-400 transition">Terms</Link>
+                <Link href="/privacy" className="hover:text-amber-400 transition">Privacy</Link>
+                <Link href="/sms-consent" className="hover:text-amber-400 transition">SMS Terms</Link>
+              </div>
             </div>
           </div>
         </footer>
