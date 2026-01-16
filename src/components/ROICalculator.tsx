@@ -155,7 +155,7 @@ export function ROICalculator() {
 
               <Link
                 href="#contact"
-                className="mt-6 w-full inline-flex items-center justify-center rounded-full bg-amber-600 px-6 py-4 text-base font-bold text-white shadow-lg shadow-amber-600/25 transition hover:bg-amber-700 hover:scale-105"
+                className="mt-6 w-full inline-flex items-center justify-center rounded-full bg-amber-700 px-6 py-4 text-base font-bold text-white shadow-lg shadow-amber-700/25 transition hover:bg-amber-800 hover:scale-105"
               >
                 Stop Losing ${monthlyRecovery.toLocaleString()}/Month
                 <svg className="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

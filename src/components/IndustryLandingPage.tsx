@@ -57,7 +57,7 @@ export function IndustryLandingPage({
 
           <Link
             href="#contact"
-            className="inline-flex items-center rounded-full bg-amber-600 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-amber-600/25 transition hover:bg-amber-700 hover:shadow-amber-600/40"
+            className="inline-flex items-center rounded-full bg-amber-700 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-amber-700/25 transition hover:bg-amber-800 hover:shadow-amber-700/40"
           >
             Get Your Free Quote
           </Link>
@@ -111,7 +111,7 @@ export function IndustryLandingPage({
               <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="#contact"
-                  className="inline-flex items-center justify-center rounded-full bg-amber-600 px-8 py-4 text-base font-bold text-white shadow-lg shadow-amber-600/30 transition hover:bg-amber-700 hover:shadow-amber-600/40 hover:scale-105"
+                  className="inline-flex items-center justify-center rounded-full bg-amber-700 px-8 py-4 text-base font-bold text-white shadow-lg shadow-amber-700/30 transition hover:bg-amber-800 hover:shadow-amber-700/40 hover:scale-105"
                 >
                   Stop Losing {industry} Jobs Today
                   <svg className="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

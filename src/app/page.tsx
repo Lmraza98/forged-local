@@ -168,7 +168,7 @@ export default function HomePage() {
                 href="https://calendly.com/YOUR_CALENDLY_URL"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center rounded-full bg-amber-600 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-amber-600/25 transition hover:bg-amber-700 hover:shadow-amber-600/40 hover:scale-105"
+                className="inline-flex items-center rounded-full bg-amber-700 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-amber-700/25 transition hover:bg-amber-800 hover:shadow-amber-700/40 hover:scale-105"
               >
                 <svg className="mr-1.5 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -242,7 +242,7 @@ export default function HomePage() {
                     href="https://calendly.com/YOUR_CALENDLY_URL"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-full bg-amber-600 px-8 py-4 text-base font-bold text-white shadow-xl shadow-amber-600/20 transition hover:bg-amber-500 hover:shadow-amber-500/30 hover:scale-105"
+                    className="inline-flex items-center justify-center rounded-full bg-amber-700 px-8 py-4 text-base font-bold text-white shadow-xl shadow-amber-700/20 transition hover:bg-amber-500 hover:shadow-amber-500/30 hover:scale-105"
                   >
                     <svg className="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -527,8 +527,8 @@ export default function HomePage() {
                   </div>
 
                   {/* Growth - Featured */}
-                  <div className="rounded-2xl border-2 border-amber-600 bg-white p-6 shadow-xl shadow-amber-600/10 relative">
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-amber-600 px-3 py-1 text-xs font-bold text-white">
+                  <div className="rounded-2xl border-2 border-amber-700 bg-white p-6 shadow-xl shadow-amber-700/10 relative">
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-amber-700 px-3 py-1 text-xs font-bold text-white">
                       MOST POPULAR
                     </div>
                     <h3 className="text-lg font-bold text-slate-900 mb-2">Growth</h3>
@@ -551,7 +551,7 @@ export default function HomePage() {
                       href="https://calendly.com/YOUR_CALENDLY_URL"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block w-full rounded-full bg-amber-600 py-3 text-center text-sm font-bold text-white shadow-lg shadow-amber-600/25 transition hover:bg-amber-700"
+                      className="block w-full rounded-full bg-amber-700 py-3 text-center text-sm font-bold text-white shadow-lg shadow-amber-700/25 transition hover:bg-amber-800"
                     >
                       Start Pilot
                     </a>
