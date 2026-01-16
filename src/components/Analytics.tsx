@@ -2,54 +2,74 @@
 
 import Script from 'next/script'
 
-// Replace these with your actual IDs
-const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX' // Your GA4 Measurement ID
-const GTM_ID = 'GTM-XXXXXXX' // Your Google Tag Manager ID
+// Analytics IDs from environment variables
+// Set NEXT_PUBLIC_GA_ID and NEXT_PUBLIC_GTM_ID in your .env.local file
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID
+const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID
+
+// Strict validation - must be real IDs (start with G- or GTM-)
+const isGAConfigured = GA_MEASUREMENT_ID && GA_MEASUREMENT_ID.startsWith('G-') && !GA_MEASUREMENT_ID.includes('XXXX')
+const isGTMConfigured = GTM_ID && GTM_ID.startsWith('GTM-') && !GTM_ID.includes('XXXX')
 
 export function Analytics() {
+  // Don't render anything if no valid analytics configured
+  if (!isGAConfigured && !isGTMConfigured) {
+    return null
+  }
+
   return (
     <>
-      {/* Google Tag Manager */}
-      <Script
-        id="gtm-script"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','${GTM_ID}');
-          `,
-        }}
-      />
+      {/* Google Tag Manager - only load if properly configured */}
+      {isGTMConfigured && GTM_ID && (
+        <Script
+          id="gtm-script"
+          strategy="lazyOnload"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','${GTM_ID}');
+            `,
+          }}
+        />
+      )}
 
-      {/* Google Analytics 4 */}
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-        strategy="afterInteractive"
-      />
-      <Script
-        id="ga4-script"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${GA_MEASUREMENT_ID}', {
-              page_title: document.title,
-              page_location: window.location.href,
-            });
-          `,
-        }}
-      />
+      {/* Google Analytics 4 - only load if properly configured */}
+      {isGAConfigured && GA_MEASUREMENT_ID && (
+        <>
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+            strategy="lazyOnload"
+          />
+          <Script
+            id="ga4-script"
+            strategy="lazyOnload"
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_MEASUREMENT_ID}', {
+                  page_title: document.title,
+                  page_location: window.location.href,
+                });
+              `,
+            }}
+          />
+        </>
+      )}
     </>
   )
 }
 
-// GTM noscript tag - add this to body
+// GTM noscript tag - only render if properly configured
 export function GTMNoScript() {
+  if (!isGTMConfigured || !GTM_ID) {
+    return null
+  }
+  
   return (
     <noscript>
       <iframe
@@ -57,6 +77,7 @@ export function GTMNoScript() {
         height="0"
         width="0"
         style={{ display: 'none', visibility: 'hidden' }}
+        title="Google Tag Manager"
       />
     </noscript>
   )

@@ -1,11 +1,11 @@
 // app/page.tsx
-import { ContactForm } from '@/components/ContactForm'
-import { TrustSignals } from '@/components/TrustSignals'
 import Link from 'next/link'
 import { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 
 // Lazy load below-fold components for better LCP
+const ContactForm = dynamic(() => import('@/components/ContactForm').then(mod => ({ default: mod.ContactForm })))
+const TrustSignals = dynamic(() => import('@/components/TrustSignals').then(mod => ({ default: mod.TrustSignals })))
 const FloatingCTA = dynamic(() => import('@/components/FloatingCTA').then(mod => ({ default: mod.FloatingCTA })))
 const ExitIntentPopup = dynamic(() => import('@/components/ExitIntentPopup').then(mod => ({ default: mod.ExitIntentPopup })))
 const ROICalculator = dynamic(() => import('@/components/ROICalculator').then(mod => ({ default: mod.ROICalculator })))
@@ -423,7 +423,7 @@ export default function HomePage() {
                         </svg>
                       </div>
                       <div className="text-3xl font-bold text-amber-600">{industry.stat}</div>
-                      <div className="text-sm text-slate-500">{industry.desc}</div>
+                      <div className="text-sm text-slate-600">{industry.desc}</div>
                     </Link>
                   ))}
                 </div>
@@ -501,10 +501,10 @@ export default function HomePage() {
                   {/* Starter */}
                   <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
                     <h3 className="text-lg font-bold text-slate-900 mb-2">Starter</h3>
-                    <p className="text-sm text-slate-500 mb-4">For solo operators</p>
+                    <p className="text-sm text-slate-600 mb-4">For solo operators</p>
                     <div className="mb-6">
                       <span className="text-4xl font-bold text-slate-900">$149</span>
-                      <span className="text-slate-500">/mo</span>
+                      <span className="text-slate-600">/mo</span>
                     </div>
                     <ul className="space-y-3 mb-6 text-sm">
                       {['Up to 50 calls/month', 'Missed call text-back', 'Basic inbox', 'Email support'].map((item, i) => (
@@ -532,10 +532,10 @@ export default function HomePage() {
                       MOST POPULAR
                     </div>
                     <h3 className="text-lg font-bold text-slate-900 mb-2">Growth</h3>
-                    <p className="text-sm text-slate-500 mb-4">For growing teams</p>
+                    <p className="text-sm text-slate-600 mb-4">For growing teams</p>
                     <div className="mb-6">
                       <span className="text-4xl font-bold text-slate-900">$299</span>
-                      <span className="text-slate-500">/mo</span>
+                      <span className="text-slate-600">/mo</span>
                     </div>
                     <ul className="space-y-3 mb-6 text-sm">
                       {['Up to 150 calls/month', 'Everything in Starter', 'Emergency keyword flagging', 'Performance reports', 'Priority support'].map((item, i) => (
@@ -560,10 +560,10 @@ export default function HomePage() {
                   {/* Scale */}
                   <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
                     <h3 className="text-lg font-bold text-slate-900 mb-2">Scale</h3>
-                    <p className="text-sm text-slate-500 mb-4">For multi-line operations</p>
+                    <p className="text-sm text-slate-600 mb-4">For multi-line operations</p>
                     <div className="mb-6">
                       <span className="text-4xl font-bold text-slate-900">$499</span>
-                      <span className="text-slate-500">/mo</span>
+                      <span className="text-slate-600">/mo</span>
                     </div>
                     <ul className="space-y-3 mb-6 text-sm">
                       {['Unlimited calls', 'Everything in Growth', 'Multiple lines/locations', 'Custom integrations', 'Dedicated account manager'].map((item, i) => (
@@ -587,7 +587,7 @@ export default function HomePage() {
                 </div>
 
                 {/* Trust line */}
-                <p className="mt-8 text-center text-sm text-slate-500">
+                <p className="mt-8 text-center text-sm text-slate-600">
                   No contracts. No setup fee for pilots. Cancel anytime by removing call forwarding.
                 </p>
               </div>
