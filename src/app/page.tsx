@@ -1,5 +1,10 @@
 // app/page.tsx
 import { ContactForm } from '@/components/ContactForm'
+import { FloatingCTA } from '@/components/FloatingCTA'
+import { ExitIntentPopup } from '@/components/ExitIntentPopup'
+import { ROICalculator } from '@/components/ROICalculator'
+import { MobileCallButton } from '@/components/MobileCallButton'
+import { TrustSignals } from '@/components/TrustSignals'
 import Link from 'next/link'
 import { Metadata } from 'next'
 
@@ -115,6 +120,11 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
+
+      {/* Conversion Components */}
+      <FloatingCTA />
+      <ExitIntentPopup />
+      <MobileCallButton />
 
       <div className="flex min-h-screen flex-col bg-[#FFFDF8] text-slate-900">
         {/* STICKY HEADER */}
@@ -431,6 +441,9 @@ export default function HomePage() {
             </div>
           </section>
 
+          {/* ROI CALCULATOR */}
+          <ROICalculator />
+
           {/* PRICING */}
           <section id="pricing" className="bg-[#FFFDF8] py-20 sm:py-28">
             <div className="container mx-auto px-4 lg:px-8">
@@ -565,9 +578,12 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  <div className="rounded-2xl border border-slate-700 bg-slate-800/50 p-6 sm:p-8">
-                    <h3 className="text-xl font-bold text-white mb-6">Get your free quote</h3>
-                    <ContactForm />
+                  <div>
+                    <TrustSignals />
+                    <div className="rounded-2xl border border-slate-700 bg-slate-800/50 p-6 sm:p-8">
+                      <h3 className="text-xl font-bold text-white mb-6">Get your free quote</h3>
+                      <ContactForm />
+                    </div>
                   </div>
                 </div>
               </div>
