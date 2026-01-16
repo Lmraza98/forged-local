@@ -1,11 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Performance optimizations
-  experimental: {
-    optimizeCss: true,
-  },
-  
   // Security headers
   async headers() {
     return [
