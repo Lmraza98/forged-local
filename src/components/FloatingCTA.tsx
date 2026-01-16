@@ -43,7 +43,7 @@ export function FloatingCTA() {
           <div className="flex items-center gap-2 w-full sm:w-auto">
             <Link
               href="#calculator"
-              className="flex-1 sm:flex-none inline-flex items-center justify-center rounded-full bg-amber-500 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-amber-500/25 transition hover:bg-amber-600 hover:scale-105"
+              className="flex-1 sm:flex-none inline-flex items-center justify-center rounded-full bg-amber-600 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-amber-600/25 transition hover:bg-amber-700 hover:scale-105"
             >
               Calculate My Loss
               <svg className="ml-1.5 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

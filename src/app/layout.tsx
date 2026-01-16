@@ -64,6 +64,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={dmSans.variable}>
       <head>
+        {/* Preconnect to improve font loading */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* DNS prefetch for external resources */}
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <CustomAnalytics />
       </head>
       <body className="bg-[#FFFDF8] text-slate-900 antialiased font-sans">

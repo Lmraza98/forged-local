@@ -26,7 +26,7 @@ export function ROICalculator() {
             <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
               How much are missed calls costing you?
             </h2>
-            <p className="mt-4 text-lg text-slate-400">
+            <p className="mt-4 text-lg text-slate-300">
               Adjust the sliders to see your potential revenue loss
             </p>
           </div>
@@ -36,17 +36,21 @@ export function ROICalculator() {
             <div className="space-y-8 rounded-2xl border border-slate-700 bg-slate-800/50 p-6 sm:p-8">
               <div>
                 <div className="flex justify-between items-center mb-3">
-                  <label className="text-sm font-medium text-slate-300">
+                  <label htmlFor="missed-calls" className="text-sm font-medium text-slate-300">
                     Missed calls per week
                   </label>
-                  <span className="text-2xl font-bold text-amber-400">{missedCalls}</span>
+                  <span className="text-2xl font-bold text-amber-400" aria-live="polite">{missedCalls}</span>
                 </div>
                 <input
+                  id="missed-calls"
                   type="range"
                   min="1"
                   max="50"
                   value={missedCalls}
                   onChange={(e) => setMissedCalls(Number(e.target.value))}
+                  aria-valuenow={missedCalls}
+                  aria-valuemin={1}
+                  aria-valuemax={50}
                   className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-500"
                 />
                 <div className="flex justify-between text-xs text-slate-500 mt-1">
@@ -57,18 +61,22 @@ export function ROICalculator() {
 
               <div>
                 <div className="flex justify-between items-center mb-3">
-                  <label className="text-sm font-medium text-slate-300">
+                  <label htmlFor="avg-job-value" className="text-sm font-medium text-slate-300">
                     Average job value
                   </label>
-                  <span className="text-2xl font-bold text-amber-400">${avgJobValue.toLocaleString()}</span>
+                  <span className="text-2xl font-bold text-amber-400" aria-live="polite">${avgJobValue.toLocaleString()}</span>
                 </div>
                 <input
+                  id="avg-job-value"
                   type="range"
                   min="100"
                   max="5000"
                   step="100"
                   value={avgJobValue}
                   onChange={(e) => setAvgJobValue(Number(e.target.value))}
+                  aria-valuenow={avgJobValue}
+                  aria-valuemin={100}
+                  aria-valuemax={5000}
                   className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-500"
                 />
                 <div className="flex justify-between text-xs text-slate-500 mt-1">
@@ -79,18 +87,22 @@ export function ROICalculator() {
 
               <div>
                 <div className="flex justify-between items-center mb-3">
-                  <label className="text-sm font-medium text-slate-300">
+                  <label htmlFor="close-rate" className="text-sm font-medium text-slate-300">
                     Your close rate
                   </label>
-                  <span className="text-2xl font-bold text-amber-400">{closeRate}%</span>
+                  <span className="text-2xl font-bold text-amber-400" aria-live="polite">{closeRate}%</span>
                 </div>
                 <input
+                  id="close-rate"
                   type="range"
                   min="10"
                   max="80"
                   step="5"
                   value={closeRate}
                   onChange={(e) => setCloseRate(Number(e.target.value))}
+                  aria-valuenow={closeRate}
+                  aria-valuemin={10}
+                  aria-valuemax={80}
                   className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-500"
                 />
                 <div className="flex justify-between text-xs text-slate-500 mt-1">
@@ -108,22 +120,22 @@ export function ROICalculator() {
 
               <div className="space-y-4">
                 <div className="flex justify-between items-center py-3 border-b border-slate-700/50">
-                  <span className="text-slate-400">Missed calls/month</span>
+                  <span className="text-slate-300">Missed calls/month</span>
                   <span className="text-xl font-bold text-white">{potentialLeads}</span>
                 </div>
                 <div className="flex justify-between items-center py-3 border-b border-slate-700/50">
-                  <span className="text-slate-400">Leads recovered (60%)</span>
+                  <span className="text-slate-300">Leads recovered (60%)</span>
                   <span className="text-xl font-bold text-emerald-400">+{recoveredLeads}</span>
                 </div>
                 <div className="flex justify-between items-center py-3 border-b border-slate-700/50">
-                  <span className="text-slate-400">Extra jobs booked</span>
+                  <span className="text-slate-300">Extra jobs booked</span>
                   <span className="text-xl font-bold text-emerald-400">+{bookedJobs}</span>
                 </div>
               </div>
 
               <div className="mt-6 pt-6 border-t border-amber-500/30">
                 <div className="text-center">
-                  <p className="text-sm text-slate-400 mb-1">Potential monthly recovery</p>
+                  <p className="text-sm text-slate-300 mb-1">Potential monthly recovery</p>
                   <p className="text-4xl sm:text-5xl font-bold text-white">
                     ${monthlyRecovery.toLocaleString()}
                   </p>
@@ -134,7 +146,7 @@ export function ROICalculator() {
               </div>
 
               <div className="mt-6 p-4 rounded-xl bg-slate-900/50 text-center">
-                <p className="text-xs text-slate-400 mb-1">ForgedLocal costs just</p>
+                <p className="text-xs text-slate-300 mb-1">ForgedLocal costs just</p>
                 <p className="text-lg font-bold text-white">$149/month</p>
                 <p className="text-emerald-400 text-sm font-semibold">
                   {Math.round(monthlyRecovery / 149)}x ROI
@@ -143,7 +155,7 @@ export function ROICalculator() {
 
               <Link
                 href="#contact"
-                className="mt-6 w-full inline-flex items-center justify-center rounded-full bg-amber-500 px-6 py-4 text-base font-bold text-white shadow-lg shadow-amber-500/25 transition hover:bg-amber-400 hover:scale-105"
+                className="mt-6 w-full inline-flex items-center justify-center rounded-full bg-amber-600 px-6 py-4 text-base font-bold text-white shadow-lg shadow-amber-600/25 transition hover:bg-amber-700 hover:scale-105"
               >
                 Stop Losing ${monthlyRecovery.toLocaleString()}/Month
                 <svg className="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

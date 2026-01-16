@@ -77,7 +77,7 @@ export default function HowItWorksPage() {
 
             <Link
               href="/#contact"
-              className="inline-flex items-center rounded-full bg-amber-500 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-amber-500/25 transition hover:bg-amber-600 hover:shadow-amber-500/40"
+              className="inline-flex items-center rounded-full bg-amber-600 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-amber-600/25 transition hover:bg-amber-700 hover:shadow-amber-600/40"
             >
               Get Free Quote
             </Link>
@@ -347,7 +347,7 @@ export default function HowItWorksPage() {
                 <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
                   <Link
                     href="/#contact"
-                    className="inline-flex items-center justify-center rounded-full bg-amber-500 px-8 py-4 text-base font-bold text-white shadow-lg shadow-amber-500/30 transition hover:bg-amber-400 hover:shadow-amber-400/40"
+                    className="inline-flex items-center justify-center rounded-full bg-amber-600 px-8 py-4 text-base font-bold text-white shadow-lg shadow-amber-600/30 transition hover:bg-amber-700 hover:shadow-amber-600/40"
                   >
                     Get Your Free Quote
                     <svg className="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -355,7 +355,7 @@ export default function HowItWorksPage() {
                     </svg>
                   </Link>
                 </div>
-                <p className="mt-6 text-sm text-slate-400">
+                <p className="mt-6 text-sm text-slate-300">
                   Setup in 48 hours • No contracts • Keep your number
                 </p>
               </div>

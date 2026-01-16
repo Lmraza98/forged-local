@@ -131,7 +131,7 @@ export function ExitIntentPopup() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full rounded-xl bg-amber-500 px-6 py-4 text-base font-bold text-white shadow-lg shadow-amber-500/25 transition hover:bg-amber-600 disabled:opacity-50"
+                className="w-full rounded-xl bg-amber-600 px-6 py-4 text-base font-bold text-white shadow-lg shadow-amber-600/25 transition hover:bg-amber-700 disabled:opacity-50"
               >
                 {isSubmitting ? 'Submitting...' : 'Call Me Back →'}
               </button>

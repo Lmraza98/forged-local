@@ -320,7 +320,7 @@ export function ContactForm({ redirectToThankYou = true }: ContactFormProps) {
           <button 
             type="submit" 
             disabled={!canSubmit} 
-            className="w-full rounded-xl bg-amber-500 px-6 py-4 text-base font-bold text-white shadow-lg shadow-amber-500/25 transition hover:bg-amber-400 hover:shadow-amber-400/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-800 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full rounded-xl bg-amber-600 px-6 py-4 text-base font-bold text-white shadow-lg shadow-amber-600/25 transition hover:bg-amber-700 hover:shadow-amber-600/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-800 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting ? (
               <span className="flex items-center justify-center gap-2">

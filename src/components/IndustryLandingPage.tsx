@@ -57,7 +57,7 @@ export function IndustryLandingPage({
 
           <Link
             href="#contact"
-            className="inline-flex items-center rounded-full bg-amber-500 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-amber-500/25 transition hover:bg-amber-600 hover:shadow-amber-500/40"
+            className="inline-flex items-center rounded-full bg-amber-600 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-amber-600/25 transition hover:bg-amber-700 hover:shadow-amber-600/40"
           >
             Get Your Free Quote
           </Link>
@@ -96,22 +96,22 @@ export function IndustryLandingPage({
               <div className="mt-10 grid grid-cols-3 gap-4 sm:gap-8 max-w-2xl mx-auto">
                 <div className="text-center">
                   <div className="text-3xl sm:text-4xl font-bold text-amber-400">{stats.missedCallPercent}</div>
-                  <div className="text-xs sm:text-sm text-slate-400 mt-1">Calls Go to Voicemail</div>
+                  <div className="text-xs sm:text-sm text-slate-300 mt-1">Calls Go to Voicemail</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl sm:text-4xl font-bold text-amber-400">{stats.avgJobValue}</div>
-                  <div className="text-xs sm:text-sm text-slate-400 mt-1">Avg Job Value</div>
+                  <div className="text-xs sm:text-sm text-slate-300 mt-1">Avg Job Value</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl sm:text-4xl font-bold text-red-400">{stats.monthlyLoss}</div>
-                  <div className="text-xs sm:text-sm text-slate-400 mt-1">Lost Monthly</div>
+                  <div className="text-xs sm:text-sm text-slate-300 mt-1">Lost Monthly</div>
                 </div>
               </div>
 
               <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="#contact"
-                  className="inline-flex items-center justify-center rounded-full bg-amber-500 px-8 py-4 text-base font-bold text-white shadow-lg shadow-amber-500/30 transition hover:bg-amber-400 hover:shadow-amber-400/40 hover:scale-105"
+                  className="inline-flex items-center justify-center rounded-full bg-amber-600 px-8 py-4 text-base font-bold text-white shadow-lg shadow-amber-600/30 transition hover:bg-amber-700 hover:shadow-amber-600/40 hover:scale-105"
                 >
                   Stop Losing {industry} Jobs Today
                   <svg className="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

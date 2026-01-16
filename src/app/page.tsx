@@ -1,12 +1,15 @@
 // app/page.tsx
 import { ContactForm } from '@/components/ContactForm'
-import { FloatingCTA } from '@/components/FloatingCTA'
-import { ExitIntentPopup } from '@/components/ExitIntentPopup'
-import { ROICalculator } from '@/components/ROICalculator'
-import { MobileCallButton } from '@/components/MobileCallButton'
 import { TrustSignals } from '@/components/TrustSignals'
 import Link from 'next/link'
 import { Metadata } from 'next'
+import dynamic from 'next/dynamic'
+
+// Lazy load below-fold components for better LCP
+const FloatingCTA = dynamic(() => import('@/components/FloatingCTA').then(mod => ({ default: mod.FloatingCTA })))
+const ExitIntentPopup = dynamic(() => import('@/components/ExitIntentPopup').then(mod => ({ default: mod.ExitIntentPopup })))
+const ROICalculator = dynamic(() => import('@/components/ROICalculator').then(mod => ({ default: mod.ROICalculator })))
+const MobileCallButton = dynamic(() => import('@/components/MobileCallButton').then(mod => ({ default: mod.MobileCallButton })))
 
 export const metadata: Metadata = {
   title: 'ForgedLocal | Missed Call Text Back for Contractors | NH',
@@ -165,7 +168,7 @@ export default function HomePage() {
                 href="https://calendly.com/YOUR_CALENDLY_URL"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center rounded-full bg-amber-500 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-amber-500/25 transition hover:bg-amber-600 hover:shadow-amber-500/40 hover:scale-105"
+                className="inline-flex items-center rounded-full bg-amber-600 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-amber-600/25 transition hover:bg-amber-700 hover:shadow-amber-600/40 hover:scale-105"
               >
                 <svg className="mr-1.5 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -221,15 +224,15 @@ export default function HomePage() {
                 <div className="mt-12 grid grid-cols-3 gap-6 max-w-xl mx-auto">
                   <div className="text-center">
                     <div className="text-4xl font-bold text-amber-300">27%</div>
-                    <div className="text-sm text-slate-400 mt-1">Calls Missed</div>
+                    <div className="text-sm text-slate-300 mt-1">Calls Missed</div>
                   </div>
                   <div className="text-center">
                     <div className="text-4xl font-bold text-amber-300">60s</div>
-                    <div className="text-sm text-slate-400 mt-1">Auto Text-Back</div>
+                    <div className="text-sm text-slate-300 mt-1">Auto Text-Back</div>
                   </div>
                   <div className="text-center">
                     <div className="text-4xl font-bold text-emerald-400">5x</div>
-                    <div className="text-sm text-slate-400 mt-1">Avg ROI</div>
+                    <div className="text-sm text-slate-300 mt-1">Avg ROI</div>
                   </div>
                 </div>
 
@@ -239,7 +242,7 @@ export default function HomePage() {
                     href="https://calendly.com/YOUR_CALENDLY_URL"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-full bg-amber-500 px-8 py-4 text-base font-bold text-white shadow-xl shadow-amber-500/20 transition hover:bg-amber-400 hover:shadow-amber-400/30 hover:scale-105"
+                    className="inline-flex items-center justify-center rounded-full bg-amber-600 px-8 py-4 text-base font-bold text-white shadow-xl shadow-amber-600/20 transition hover:bg-amber-500 hover:shadow-amber-500/30 hover:scale-105"
                   >
                     <svg className="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -268,12 +271,12 @@ export default function HomePage() {
           {/* SOCIAL PROOF BAR */}
           <section className="bg-[#FFFDF8] py-8 border-b border-amber-100">
             <div className="container mx-auto px-4">
-              <p className="text-center text-sm font-medium text-slate-500 mb-4">
+              <p className="text-center text-sm font-medium text-slate-600 mb-4">
                 Trusted by contractors across New Hampshire
               </p>
               <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4">
                 {['HVAC', 'Plumbing', 'Roofing', 'Electrical', 'Landscaping'].map((trade) => (
-                  <span key={trade} className="text-sm font-semibold text-slate-400 uppercase tracking-wider">
+                  <span key={trade} className="text-sm font-semibold text-slate-600 uppercase tracking-wider">
                     {trade}
                   </span>
                 ))}
@@ -353,7 +356,7 @@ export default function HomePage() {
                   <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
                     Up and running in 48 hours
                   </h2>
-                  <p className="mt-4 text-lg text-slate-400 max-w-2xl mx-auto">
+                  <p className="mt-4 text-lg text-slate-300 max-w-2xl mx-auto">
                     No new phone system. No app to learn. We plug into your existing business line.
                   </p>
                 </div>
@@ -382,7 +385,7 @@ export default function HomePage() {
                       </div>
                       <div className="rounded-2xl border border-slate-700 bg-slate-800/50 p-8 pt-12 h-full">
                         <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
-                        <p className="text-slate-400">{item.description}</p>
+                        <p className="text-slate-300">{item.description}</p>
                       </div>
                     </div>
                   ))}
@@ -452,7 +455,7 @@ export default function HomePage() {
                       </blockquote>
                       <div>
                         <p className="font-bold text-white">{testimonial.name}</p>
-                        <p className="text-sm text-slate-400">{testimonial.title} • {testimonial.location}</p>
+                        <p className="text-sm text-slate-300">{testimonial.title} • {testimonial.location}</p>
                       </div>
                     </div>
                   ))}
@@ -524,8 +527,8 @@ export default function HomePage() {
                   </div>
 
                   {/* Growth - Featured */}
-                  <div className="rounded-2xl border-2 border-amber-500 bg-white p-6 shadow-xl shadow-amber-500/10 relative">
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-amber-500 px-3 py-1 text-xs font-bold text-white">
+                  <div className="rounded-2xl border-2 border-amber-600 bg-white p-6 shadow-xl shadow-amber-600/10 relative">
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-amber-600 px-3 py-1 text-xs font-bold text-white">
                       MOST POPULAR
                     </div>
                     <h3 className="text-lg font-bold text-slate-900 mb-2">Growth</h3>
@@ -548,7 +551,7 @@ export default function HomePage() {
                       href="https://calendly.com/YOUR_CALENDLY_URL"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block w-full rounded-full bg-amber-500 py-3 text-center text-sm font-bold text-white shadow-lg shadow-amber-500/25 transition hover:bg-amber-600"
+                      className="block w-full rounded-full bg-amber-600 py-3 text-center text-sm font-bold text-white shadow-lg shadow-amber-600/25 transition hover:bg-amber-700"
                     >
                       Start Pilot
                     </a>
@@ -695,7 +698,7 @@ export default function HomePage() {
                   </div>
                   <span className="text-lg font-bold text-white">ForgedLocal</span>
                 </div>
-                <p className="text-slate-400 max-w-sm">
+                <p className="text-slate-300 max-w-sm">
                   Missed call text-back for contractors. Stop losing $5,000+ jobs to voicemail.
                 </p>
               </div>
@@ -705,7 +708,7 @@ export default function HomePage() {
                 <ul className="space-y-2">
                   {industries.map((ind) => (
                     <li key={ind.name}>
-                      <Link href={ind.href} className="text-slate-400 hover:text-amber-400 transition">
+                      <Link href={ind.href} className="text-slate-300 hover:text-amber-400 transition">
                         {ind.name}
                       </Link>
                     </li>
@@ -716,22 +719,22 @@ export default function HomePage() {
               <div>
                 <h4 className="font-bold text-white mb-4">Company</h4>
                 <ul className="space-y-2">
-                  <li><Link href="/how-it-works" className="text-slate-400 hover:text-amber-400 transition">How It Works</Link></li>
-                  <li><Link href="#pricing" className="text-slate-400 hover:text-amber-400 transition">Pricing</Link></li>
-                  <li><Link href="#contact" className="text-slate-400 hover:text-amber-400 transition">Contact</Link></li>
-                  <li><Link href="/terms" className="text-slate-400 hover:text-amber-400 transition">Terms of Service</Link></li>
-                  <li><Link href="/privacy" className="text-slate-400 hover:text-amber-400 transition">Privacy Policy</Link></li>
-                  <li><Link href="/sms-consent" className="text-slate-400 hover:text-amber-400 transition">SMS Terms</Link></li>
+                  <li><Link href="/how-it-works" className="text-slate-300 hover:text-amber-400 transition">How It Works</Link></li>
+                  <li><Link href="#pricing" className="text-slate-300 hover:text-amber-400 transition">Pricing</Link></li>
+                  <li><Link href="#contact" className="text-slate-300 hover:text-amber-400 transition">Contact</Link></li>
+                  <li><Link href="/terms" className="text-slate-300 hover:text-amber-400 transition">Terms of Service</Link></li>
+                  <li><Link href="/privacy" className="text-slate-300 hover:text-amber-400 transition">Privacy Policy</Link></li>
+                  <li><Link href="/sms-consent" className="text-slate-300 hover:text-amber-400 transition">SMS Terms</Link></li>
                 </ul>
               </div>
             </div>
             
-            <div className="mt-12 pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500">
+            <div className="mt-12 pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-400">
               <p>© 2025 ForgedLocal. All rights reserved.</p>
               <div className="flex gap-4">
-                <Link href="/terms" className="hover:text-amber-400 transition">Terms</Link>
-                <Link href="/privacy" className="hover:text-amber-400 transition">Privacy</Link>
-                <Link href="/sms-consent" className="hover:text-amber-400 transition">SMS Terms</Link>
+                <Link href="/terms" className="text-slate-400 hover:text-amber-400 transition">Terms</Link>
+                <Link href="/privacy" className="text-slate-400 hover:text-amber-400 transition">Privacy</Link>
+                <Link href="/sms-consent" className="text-slate-400 hover:text-amber-400 transition">SMS Terms</Link>
               </div>
             </div>
           </div>
