@@ -110,7 +110,7 @@ export default function HowItWorksPage() {
                 </h1>
                 <p className="mt-6 text-lg text-slate-300 sm:text-xl leading-relaxed">
                   We plug in behind your existing phone number. When a call goes unanswered, 
-                  we text them back from your number within 60 seconds. That's it.
+                  we text them back from your number within 60 seconds. That&apos;s it.
                 </p>
               </div>
             </div>
@@ -342,7 +342,7 @@ export default function HowItWorksPage() {
                   Ready to capture more leads?
                 </h2>
                 <p className="mt-4 text-lg text-slate-300">
-                  Get a free quote and see how much revenue you're leaving on the table.
+                  Get a free quote and see how much revenue you&apos;re leaving on the table.
                 </p>
                 <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
                   <Link

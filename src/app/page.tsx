@@ -190,7 +190,7 @@ export default function HomePage() {
                 </h1>
 
                 <p className="mt-6 text-lg text-slate-300 sm:text-xl max-w-2xl mx-auto leading-relaxed">
-                  When you're on a job, customers don't leave voicemails—they call your competitor. 
+                  When you&apos;re on a job, customers don&apos;t leave voicemails—they call your competitor. 
                   <strong className="text-white"> ForgedLocal texts them back in 60 seconds</strong>, from your number, so you never lose another lead.
                 </p>
 
@@ -262,10 +262,10 @@ export default function HomePage() {
                       The Problem
                     </span>
                     <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl mb-6">
-                      85% of callers won't leave a voicemail
+                      85% of callers won&apos;t leave a voicemail
                     </h2>
                     <p className="text-lg text-slate-600 mb-8">
-                      They'll just call the next contractor on Google. By the time you check your missed calls, that $800 AC repair or $2,400 plumbing emergency is someone else's job.
+                      They&apos;ll just call the next contractor on Google. By the time you check your missed calls, that $800 AC repair or $2,400 plumbing emergency is someone else&apos;s job.
                     </p>
                     <div className="space-y-4">
                       {[
@@ -291,7 +291,7 @@ export default function HomePage() {
                       Auto text-back in 60 seconds
                     </h2>
                     <p className="text-lg text-slate-600 mb-8">
-                      ForgedLocal texts missed callers from your business number before they dial someone else. They respond via text, you reply when you're free, and you close the job.
+                      ForgedLocal texts missed callers from your business number before they dial someone else. They respond via text, you reply when you&apos;re free, and you close the job.
                     </p>
                     <div className="space-y-4">
                       {[
@@ -418,7 +418,7 @@ export default function HomePage() {
                         <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                       </svg>
                       <blockquote className="text-lg text-slate-300 mb-6">
-                        "{testimonial.quote}"
+                        &ldquo;{testimonial.quote}&rdquo;
                       </blockquote>
                       <div>
                         <p className="font-bold text-white">{testimonial.name}</p>
@@ -547,7 +547,7 @@ export default function HomePage() {
                       Ready to stop losing leads?
                     </h2>
                     <p className="mt-6 text-lg text-slate-300">
-                      Get a free quote and see exactly how much revenue you're leaving on the table. Most contractors are up and running within 48 hours.
+                      Get a free quote and see exactly how much revenue you&apos;re leaving on the table. Most contractors are up and running within 48 hours.
                     </p>
                     
                     <div className="mt-10 space-y-5">

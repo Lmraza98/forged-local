@@ -245,7 +245,7 @@ export function IndustryLandingPage({
                   <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                 </svg>
                 <blockquote className="text-xl sm:text-2xl font-medium text-white leading-relaxed">
-                  "{testimonial.quote}"
+                  &ldquo;{testimonial.quote}&rdquo;
                 </blockquote>
                 <div className="mt-6">
                   <p className="font-bold text-amber-400">{testimonial.name}</p>
@@ -306,7 +306,7 @@ export function IndustryLandingPage({
                     Ready to Capture Every {industry} Lead?
                   </h2>
                   <p className="mt-4 text-lg text-slate-300">
-                    Get a free quote and see exactly how much revenue you're leaving on the table.
+                    Get a free quote and see exactly how much revenue you&apos;re leaving on the table.
                   </p>
                   
                   <div className="mt-8 space-y-4">
