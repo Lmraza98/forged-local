@@ -2,9 +2,11 @@
 User-agent: *
 Allow: /
 
-# Sitemap
+# Disallow thank-you page (post-conversion, not for indexing)
+Disallow: /thank-you
+
+# Disallow API routes
+Disallow: /api/
+
+# Sitemap - canonical domain (non-www, https)
 Sitemap: https://forgedlocal.com/sitemap.xml
-
-# Crawl delay for politeness
-Crawl-delay: 1
-
