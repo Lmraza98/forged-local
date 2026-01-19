@@ -1,12 +1,1 @@
-# https://www.robotstxt.org/robotstxt.html
-User-agent: *
-Allow: /
 
-# Disallow thank-you page (post-conversion, not for indexing)
-Disallow: /thank-you
-
-# Disallow API routes
-Disallow: /api/
-
-# Sitemap - canonical domain (non-www, https)
-Sitemap: https://forgedlocal.com/sitemap.xml

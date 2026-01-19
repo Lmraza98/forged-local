@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import { DM_Sans } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
+import { GoogleAdsTag } from '@/components/Analytics'
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -62,6 +63,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={dmSans.variable}>
+      <head>
+        <GoogleAdsTag />
+      </head>
       <body className="bg-[#FFFDF8] text-slate-900 antialiased font-sans">
         {children}
         <Analytics />

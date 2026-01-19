@@ -3,13 +3,42 @@
 import Script from 'next/script'
 
 // Analytics IDs from environment variables
-// Set NEXT_PUBLIC_GA_ID and NEXT_PUBLIC_GTM_ID in your .env.local file
+// Set NEXT_PUBLIC_GA_ID, NEXT_PUBLIC_GTM_ID, and NEXT_PUBLIC_GOOGLE_ADS_ID in your .env.local file
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID
+const GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID || 'AW-17886467359'
 
-// Strict validation - must be real IDs (start with G- or GTM-)
+// Strict validation - must be real IDs
 const isGAConfigured = GA_MEASUREMENT_ID && GA_MEASUREMENT_ID.startsWith('G-') && !GA_MEASUREMENT_ID.includes('XXXX')
 const isGTMConfigured = GTM_ID && GTM_ID.startsWith('GTM-') && !GTM_ID.includes('XXXX')
+const isGoogleAdsConfigured = GOOGLE_ADS_ID && GOOGLE_ADS_ID.startsWith('AW-') && !GOOGLE_ADS_ID.includes('XXXX')
+
+export function GoogleAdsTag() {
+  if (!isGoogleAdsConfigured) {
+    return null
+  }
+
+  return (
+    <>
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`}
+        strategy="afterInteractive"
+      />
+      <Script
+        id="google-ads-script"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GOOGLE_ADS_ID}');
+          `,
+        }}
+      />
+    </>
+  )
+}
 
 export function Analytics() {
   // Don't render anything if no valid analytics configured

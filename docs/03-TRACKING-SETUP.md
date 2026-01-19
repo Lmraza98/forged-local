@@ -225,3 +225,5 @@ Before launching any campaign:
 2. GA4 → Realtime → Events
 3. Should see `form_submit` event
 
+
+
