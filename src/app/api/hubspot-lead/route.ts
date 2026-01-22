@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
 
+// Schema requires phone and email (HubSpot needs email as contact identifier)
 const schema = z.object({
-  name: z.string().min(1, 'Name is required'),
+  name: z.string().optional(),
   email: z.string().email('Invalid email address'),
-  phone: z.string().optional(),
+  phone: z.string().min(1, 'Phone is required'),
   company: z.string().optional(),
   message: z.string().optional(),
   typeOfBusiness: z.string().optional(),
@@ -39,10 +40,14 @@ export async function POST(request: Request) {
       pageName
     } = result.data
 
-    // Determine first and last name logic
-    const parts = name.trim().split(' ')
-    const finalFirstName = parts[0]
-    const finalLastName = parts.length > 1 ? parts.slice(1).join(' ') : ''
+    // Determine first and last name logic (handle optional name)
+    let finalFirstName = ''
+    let finalLastName = ''
+    if (name && name.trim()) {
+      const parts = name.trim().split(' ')
+      finalFirstName = parts[0]
+      finalLastName = parts.length > 1 ? parts.slice(1).join(' ') : ''
+    }
 
     const portalId = process.env.HUBSPOT_PORTAL_ID
     const formGuid = process.env.HUBSPOT_FORM_GUID || process.env.FORM_GUID

@@ -76,7 +76,7 @@ export default function HeroSection() {
             <div className="flex-1 lg:flex-none min-w-0 pt-2 sm:pt-0">
               {/* Eyebrow */}
               <p className="text-xs font-semibold tracking-[0.2em] text-amber-300 mb-3">
-                PRACTICAL CALL & LEAD SYSTEM
+                MISSED CALL TEXT-BACK SYSTEM
               </p>
 
               {/* Heading */}
@@ -84,14 +84,15 @@ export default function HeroSection() {
                 id="hero-heading"
                 className="text-3xl font-semibold leading-tight mb-2 sm:text-4xl lg:text-5xl xl:text-6xl max-w-[20ch]"
               >
-                Stop losing leads to missed calls.
+                Missed calls cost you jobs.
               </h1>
 
               {/* Supporting copy */}
               <p className="mt-2 text-sm text-slate-300 mb-4 sm:text-base max-w-[34ch] sm:max-w-lg lg:max-w-xl leading-relaxed">
-                ForgedLocal plugs into your existing business line so every call,
-                voicemail, and web lead is captured and followed up - with no change
-                to the number on your trucks.
+                ForgedLocal sets up an auto-reply system that texts back in 60 seconds.
+                When a call is missed or comes in after hours, we automatically text
+                the caller from a dedicated local number so you can capture the lead
+                and follow up when you&apos;re ready.
               </p>
             </div>
 
@@ -107,10 +108,10 @@ export default function HeroSection() {
           {/* Primary CTA block */}
           <div className="mb-4 space-y-2 sm:flex sm:items-center sm:space-y-0 sm:gap-3 w-full">
             <button className="w-full rounded-full bg-amber-400 px-6 py-3 text-sm font-semibold text-slate-950 shadow-lg shadow-amber-400/40 sm:w-auto hover:bg-amber-300 transition">
-              Book a quick intro call
+              Run my missed-call audit
             </button>
             <button className="w-full rounded-full border border-slate-600/80 bg-slate-900/40 px-6 py-3 text-sm font-medium text-slate-100 hover:border-amber-300 hover:text-amber-200 sm:w-auto transition shadow-none">
-              See how it works
+              Get a free quote
             </button>
           </div>
 

@@ -25,30 +25,27 @@ export function FloatingCTA() {
       <div className="container mx-auto px-4 py-3">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="hidden sm:flex h-10 w-10 items-center justify-center rounded-full bg-red-100 text-red-600">
+            <div className="hidden sm:flex h-10 w-10 items-center justify-center rounded-full bg-amber-100 text-amber-600">
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
             </div>
             <div>
               <p className="text-sm font-bold text-slate-900">
-                You&apos;re losing <span className="text-red-600">$4,800+/month</span> to missed calls
+                Missed calls = lost jobs
               </p>
               <p className="text-xs text-slate-600 hidden sm:block">
-                Get your free revenue recovery estimate in 2 minutes
+                Start your 14-day pilot and capture every lead
               </p>
             </div>
           </div>
           
           <div className="flex items-center gap-2 w-full sm:w-auto">
             <Link
-              href="#calculator"
-              className="flex-1 sm:flex-none inline-flex items-center justify-center rounded-full bg-amber-700 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-amber-700/25 transition hover:bg-amber-800 hover:scale-105"
+              href="#get-quote"
+              className="flex-1 sm:flex-none inline-flex items-center justify-center rounded-full bg-amber-500 px-5 py-2.5 text-sm font-bold text-slate-900 shadow-lg shadow-amber-500/25 transition hover:bg-amber-400 hover:scale-105"
             >
-              Calculate My Loss
-              <svg className="ml-1.5 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-              </svg>
+              Get Free Quote
             </Link>
             <button
               onClick={() => setIsDismissed(true)}
@@ -65,4 +62,3 @@ export function FloatingCTA() {
     </div>
   )
 }
-

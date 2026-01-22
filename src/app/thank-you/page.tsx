@@ -1,5 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { CalendlyEmbed } from '@/components/CalendlyEmbed'
+
+const CALENDLY_URL = 'https://calendly.com/lucas-forgedlocal/30min'
 
 export const metadata: Metadata = {
   title: 'Thank You | ForgedLocal',
@@ -51,23 +54,14 @@ export default function ThankYouPage() {
           {/* Calendly Embed */}
           <div className="rounded-2xl border-2 border-amber-200 bg-white p-6 sm:p-8 shadow-xl mb-8">
             <h2 className="text-xl font-bold text-slate-900 mb-2">
-              Book Your 10-Minute Setup Call
+              Book Your Setup Call
             </h2>
             <p className="text-sm text-slate-600 mb-6">
               We&apos;ll walk through your phone setup and have you live in 48 hours.
             </p>
             
-            {/* Calendly inline widget - Replace YOUR_CALENDLY_URL */}
-            <div 
-              className="calendly-inline-widget rounded-xl overflow-hidden" 
-              data-url="https://calendly.com/YOUR_CALENDLY_URL?hide_gdpr_banner=1&primary_color=f59e0b"
-              style={{ minWidth: '320px', height: '630px' }}
-            />
-            <script 
-              type="text/javascript" 
-              src="https://assets.calendly.com/assets/external/widget.js" 
-              async 
-            />
+            {/* Calendly inline widget */}
+            <CalendlyEmbed url={CALENDLY_URL} />
           </div>
 
           {/* Alternative CTA */}
@@ -99,7 +93,7 @@ export default function ThankYouPage() {
                 <svg className="h-4 w-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                10 minutes
+                30 minutes
               </span>
               <span className="flex items-center gap-1.5">
                 <svg className="h-4 w-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
