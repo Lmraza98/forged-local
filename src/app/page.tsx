@@ -245,7 +245,7 @@ export default function HomePage() {
                     {
                       step: '2',
                       title: 'ForgedLocal texts back',
-                      description: 'Within 60 seconds, we text from your number: "Sorry we missed you!"'
+                      description: 'Within 60 seconds, we send a text: "Sorry we missed you - how can we help?"'
                     },
                     {
                       step: '3',

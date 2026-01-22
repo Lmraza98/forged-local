@@ -81,7 +81,7 @@ export default function HVACPage() {
         industry="HVAC"
         industryPlural="HVAC Contractors"
         heroTitle="Stop Losing $800 AC Repair Jobs to Voicemail"
-        heroSubtitle="When you're elbow-deep in a furnace, calls go to voicemail. Those customers call your competitor next. ForgedLocal texts them back instantly—from your number—so you never lose another job."
+        heroSubtitle="When you're elbow-deep in a furnace, calls go to voicemail. Those customers call your competitor next. ForgedLocal texts them back instantly so you never lose another job."
         painPoints={[
           'Customers call while you\'re crawling through an attic or basement',
           'By the time you call back, they\'ve already booked with someone else',
@@ -124,7 +124,7 @@ export default function HVACPage() {
           },
           {
             question: 'How much does this cost compared to hiring an answering service?',
-            answer: 'Traditional HVAC answering services charge $200-500/month and often give generic responses. ForgedLocal costs less and texts from YOUR number with YOUR message. Most contractors see ROI from recovering just one job.'
+            answer: 'Traditional HVAC answering services charge $200-500/month and often give generic responses. ForgedLocal costs less and sends YOUR custom message. Most contractors see ROI from recovering just one job.'
           },
           {
             question: 'Can I customize the auto-reply message?',

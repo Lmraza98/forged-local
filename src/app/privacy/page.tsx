@@ -64,7 +64,7 @@ export default function PrivacyPage() {
               When we send SMS messages on your behalf to your missed callers:
             </p>
             <ul>
-              <li>Messages are sent from your business phone number</li>
+              <li>Messages are sent from a dedicated local number on your behalf</li>
               <li>We store message content and delivery status for your records</li>
               <li>We honor all opt-out requests (STOP messages) within 24 hours</li>
               <li>Customer phone numbers are stored securely and used only to provide the Service</li>

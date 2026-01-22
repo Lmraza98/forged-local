@@ -215,7 +215,7 @@ export function IndustryLandingPage({
                   {
                     step: '2',
                     title: 'We Catch Missed Calls',
-                    description: 'Every unanswered call triggers an instant SMS from your number: "Sorry we missed you, how can we help?"'
+                    description: 'Every unanswered call triggers an instant text: "Sorry we missed you - how can we help?"'
                   },
                   {
                     step: '3',
