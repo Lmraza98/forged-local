@@ -1,347 +1,260 @@
-'use client'
+"use client";
 
-import * as React from 'react'
-import { useForm } from '@tanstack/react-form'
-import { useRouter } from 'next/navigation'
-import { z } from 'zod'
+import { FormEvent, useState } from "react";
+import { ArrowRight, Check, CircleAlert, LoaderCircle } from "lucide-react";
+import { trackEvent } from "@/components/Analytics";
 
-interface ContactFormProps {
-  redirectToThankYou?: boolean
+type Status = { type: "idle" | "loading" | "success" | "error"; message?: string };
+type FieldErrors = Record<string, string>;
+
+const validationMessages: Record<string, string> = {
+  name: "Please enter your name.",
+  businessName: "Please enter your business name.",
+  email: "Enter a valid email address.",
+  phone: "Enter a phone number where we can reach you.",
+  website: "Include the full address, such as https://example.com.",
+  helpType: "Choose the kind of help you need.",
+  contactMethod: "Choose how you would like us to respond.",
+  message: "Tell us a little more—at least 20 characters.",
+};
+
+function validateControl(control: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement) {
+  if (control.name === "website" && !control.value) return "";
+  if (control.validity.valid) return "";
+  return validationMessages[control.name] ?? "Please check this field.";
 }
 
-export function ContactForm({ redirectToThankYou = true }: ContactFormProps) {
-  const [isSubmitted, setIsSubmitted] = React.useState(false)
-  const [error, setError] = React.useState<string | null>(null)
-  const router = useRouter()
+export function ContactForm() {
+  const [status, setStatus] = useState<Status>({ type: "idle" });
+  const [errors, setErrors] = useState<FieldErrors>({});
 
-  const form = useForm({
-    defaultValues: {
-      name: '',
-      email: '',
-      company: '',
-      phone: '',
-      typeOfBusiness: '',
-      estimatedMissedCalls: '',
-      message: ''
-    },
-    onSubmit: async ({ value }) => {
-      setError(null)
-      try {
-        const pageUri = window.location.href
-        const pageName = document.title
-        
-        const getCookie = (name: string) => {
-          const value = `; ${document.cookie}`
-          const parts = value.split(`; ${name}=`)
-          if (parts.length === 2) return parts.pop()?.split(';').shift()
-        }
-        const hutk = getCookie('hubspotutk')
-
-        const response = await fetch('/api/hubspot-lead', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            ...value,
-            pageUri,
-            pageName,
-            hutk
-          })
-        })
-
-        if (!response.ok) {
-          throw new Error('Submission failed')
-        }
-
-        // Track conversion in GTM/GA4
-        if (typeof window !== 'undefined' && (window as Window & { dataLayer?: unknown[] }).dataLayer) {
-          (window as Window & { dataLayer?: unknown[] }).dataLayer?.push({
-            event: 'form_submit',
-            form_name: 'contact_form',
-            form_destination: 'hubspot'
-          })
-        }
-
-        // Redirect to thank-you page or show success state
-        if (redirectToThankYou) {
-          router.push('/thank-you')
-        } else {
-          setIsSubmitted(true)
-        }
-      } catch (err) {
-        console.error(err)
-        setError('Something went wrong. Please email us directly.')
-      }
-    }
-  })
-
-  if (isSubmitted) {
-    return (
-      <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-8 text-center">
-        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500">
-          <svg className="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <h3 className="mb-2 text-xl font-bold text-white">We got your message!</h3>
-        <p className="text-slate-300">We&apos;ll be in touch within 24 hours to schedule your intro call.</p>
-        <button 
-          className="mt-6 text-sm font-medium text-amber-400 hover:text-amber-300 underline underline-offset-4"
-          onClick={() => {
-            setIsSubmitted(false)
-            form.reset()
-          }}
-        >
-          Send another message
-        </button>
-      </div>
-    )
+  function validateField(control: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement) {
+    const message = validateControl(control);
+    setErrors((current) => {
+      if (message) return { ...current, [control.name]: message };
+      const next = { ...current };
+      delete next[control.name];
+      return next;
+    });
   }
 
-  const inputClasses = "w-full rounded-xl border border-slate-600 bg-slate-700/50 px-4 py-3 text-sm text-white placeholder:text-slate-400 focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400/20 transition"
-  const labelClasses = "block text-sm font-medium text-slate-300 mb-1.5"
+  function clearFieldError(name: string) {
+    if (!errors[name]) return;
+    setErrors((current) => {
+      const next = { ...current };
+      delete next[name];
+      return next;
+    });
+  }
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const controls = Array.from(
+      form.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>(
+        "input:not(.honeypot input), select, textarea",
+      ),
+    );
+    const nextErrors = Object.fromEntries(
+      controls.map((control) => [control.name, validateControl(control)]).filter(([, message]) => message),
+    );
+
+    if (Object.keys(nextErrors).length) {
+      setErrors(nextErrors);
+      setStatus({ type: "error", message: "A few details need your attention." });
+      const firstInvalid = controls.find((control) => nextErrors[control.name]);
+      firstInvalid?.focus();
+      return;
+    }
+
+    setErrors({});
+    setStatus({ type: "loading" });
+    const data = Object.fromEntries(new FormData(form));
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || "We could not send your request.");
+      form.reset();
+      trackEvent("website_review_request", { form_name: "free_website_review" });
+      setStatus({ type: "success", message: "Thanks—your request was sent. We’ll be in touch soon." });
+    } catch (error) {
+      setStatus({
+        type: "error",
+        message: error instanceof Error ? error.message : "Something went wrong. Please try again.",
+      });
+    }
+  }
+
+  if (status.type === "success") {
+    return (
+      <div className="form-success" role="status" data-reveal>
+        <span className="success-icon"><Check /></span>
+        <p className="eyebrow">Request received</p>
+        <h2>You’re on the list.</h2>
+        <p>{status.message}</p>
+        <button className="text-button" type="button" onClick={() => setStatus({ type: "idle" })}>
+          Send another request <ArrowRight size={16} />
+        </button>
+      </div>
+    );
+  }
+
+  const fieldState = (name: string) => ({
+    "aria-invalid": Boolean(errors[name]),
+    "aria-describedby": errors[name] ? `${name}-error` : undefined,
+  });
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        form.handleSubmit()
-      }}
-      className="space-y-4"
-    >
-      <div className="grid gap-4 sm:grid-cols-2">
-        <form.Field
-          name="name"
-          validators={{
-            onChange: ({ value }) => {
-              const result = z.string().min(1, 'Name is required').safeParse(value)
-              if (!result.success) return result.error.errors[0].message
-            }
-          }}
-        >
-          {(field) => (
-            <div>
-              <label htmlFor={field.name} className={labelClasses}>Your name *</label>
-              <input
-                id={field.name}
-                name={field.name}
-                value={field.state.value}
-                onBlur={field.handleBlur}
-                onChange={(e) => field.handleChange(e.target.value)}
-                className={inputClasses}
-                placeholder="Jane Smith"
-              />
-              {field.state.meta.errors ? (
-                <p className="mt-1 text-xs text-red-400">
-                  {field.state.meta.errors.join(', ')}
-                </p>
-              ) : null}
-            </div>
-          )}
-        </form.Field>
-
-        <form.Field
-          name="phone"
-          validators={{
-            onChange: ({ value }) => {
-              const result = z.string().min(1, 'Phone is required').safeParse(value)
-              if (!result.success) return result.error.errors[0].message
-            }
-          }}
-        >
-          {(field) => (
-            <div>
-              <label htmlFor={field.name} className={labelClasses}>Phone number *</label>
-              <input
-                id={field.name}
-                name={field.name}
-                type="tel"
-                value={field.state.value}
-                onBlur={field.handleBlur}
-                onChange={(e) => field.handleChange(e.target.value)}
-                className={inputClasses}
-                placeholder="(555) 123-4567"
-              />
-              {field.state.meta.errors ? (
-                <p className="mt-1 text-xs text-red-400">
-                  {field.state.meta.errors.join(', ')}
-                </p>
-              ) : null}
-            </div>
-          )}
-        </form.Field>
-      </div>
-
-      <form.Field
-        name="email"
-        validators={{
-          onChange: ({ value }) => {
-            const result = z.string().email('Invalid email address').safeParse(value)
-            if (!result.success) return result.error.errors[0].message
-          }
-        }}
-      >
-        {(field) => (
-          <div>
-            <label htmlFor={field.name} className={labelClasses}>Work email *</label>
-            <input
-              id={field.name}
-              name={field.name}
-              type="email"
-              value={field.state.value}
-              onBlur={field.handleBlur}
-              onChange={(e) => field.handleChange(e.target.value)}
-              className={inputClasses}
-              placeholder="you@yourbusiness.com"
-            />
-            {field.state.meta.errors ? (
-              <p className="mt-1 text-xs text-red-400">
-                {field.state.meta.errors.join(', ')}
-              </p>
-            ) : null}
-          </div>
-        )}
-      </form.Field>
-
-      <form.Field
-        name="company"
-        validators={{
-          onChange: ({ value }) => {
-            const result = z.string().min(1, 'Business name is required').safeParse(value)
-            if (!result.success) return result.error.errors[0].message
-          }
-        }}
-      >
-        {(field) => (
-          <div>
-            <label htmlFor={field.name} className={labelClasses}>Business name *</label>
-            <input
-              id={field.name}
-              name={field.name}
-              value={field.state.value}
-              onBlur={field.handleBlur}
-              onChange={(e) => field.handleChange(e.target.value)}
-              className={inputClasses}
-              placeholder="Smith Plumbing & HVAC"
-            />
-            {field.state.meta.errors ? (
-              <p className="mt-1 text-xs text-red-400">
-                {field.state.meta.errors.join(', ')}
-              </p>
-            ) : null}
-          </div>
-        )}
-      </form.Field>
-
-      <form.Field name="typeOfBusiness">
-        {(field) => (
-          <div>
-            <label htmlFor={field.name} className={labelClasses}>
-              Type of business
-            </label>
-            <select
-              id={field.name}
-              name={field.name}
-              value={field.state.value}
-              onBlur={field.handleBlur}
-              onChange={(e) => field.handleChange(e.target.value)}
-              className={inputClasses}
-            >
-              <option value="">Select your trade...</option>
-              <option value="hvac">HVAC</option>
-              <option value="plumbing">Plumbing</option>
-              <option value="roofing">Roofing</option>
-              <option value="electrical">Electrical</option>
-              <option value="landscaping">Landscaping</option>
-              <option value="general-contractor">General Contractor</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-        )}
-      </form.Field>
-
-      <form.Field name="estimatedMissedCalls">
-        {(field) => (
-          <div>
-            <label htmlFor={field.name} className={labelClasses}>
-              How many calls do you miss per week?
-            </label>
-            <select
-              id={field.name}
-              name={field.name}
-              value={field.state.value}
-              onBlur={field.handleBlur}
-              onChange={(e) => field.handleChange(e.target.value)}
-              className={inputClasses}
-            >
-              <option value="">Select an estimate...</option>
-              <option value="1-5">1-5 calls</option>
-              <option value="5-10">5-10 calls</option>
-              <option value="10-20">10-20 calls</option>
-              <option value="20+">20+ calls</option>
-              <option value="not-sure">Not sure</option>
-            </select>
-          </div>
-        )}
-      </form.Field>
-
-      <form.Field name="message">
-        {(field) => (
-          <div>
-            <label htmlFor={field.name} className={labelClasses}>
-              Anything else we should know?
-            </label>
-            <textarea
-              id={field.name}
-              name={field.name}
-              value={field.state.value}
-              onBlur={field.handleBlur}
-              onChange={(e) => field.handleChange(e.target.value)}
-              rows={3}
-              className={inputClasses}
-              placeholder="Current phone setup, biggest frustrations, specific questions..."
-            />
-          </div>
-        )}
-      </form.Field>
-
-      {error ? (
-        <div className="rounded-xl bg-red-500/10 border border-red-500/30 p-4 text-sm text-red-400">
-          {error}
+    <form className="contact-form" onSubmit={submit} noValidate data-spotlight>
+      <div className="form-heading">
+        <span>01</span>
+        <div>
+          <h2>Tell us what you’re working with.</h2>
+          <p>Most people finish this in about two minutes.</p>
         </div>
-      ) : null}
-
-      <form.Subscribe
-        selector={(state) => [state.canSubmit, state.isSubmitting]}
-      >
-        {([canSubmit, isSubmitting]) => (
-          <button 
-            type="submit" 
-            disabled={!canSubmit} 
-            className="w-full rounded-xl bg-amber-700 px-6 py-4 text-base font-bold text-white shadow-lg shadow-amber-700/25 transition hover:bg-amber-800 hover:shadow-amber-700/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-800 disabled:opacity-50 disabled:cursor-not-allowed"
+      </div>
+      <div className="form-grid">
+        <label className="field-wrap">
+          <span className="field-label">Name <b>*</b></span>
+          <input
+            name="name"
+            required
+            autoComplete="name"
+            placeholder="Your name"
+            {...fieldState("name")}
+            onBlur={(event) => validateField(event.currentTarget)}
+            onChange={() => clearFieldError("name")}
+          />
+          {errors.name && <small className="field-error" id="name-error"><CircleAlert />{errors.name}</small>}
+        </label>
+        <label className="field-wrap">
+          <span className="field-label">Business name <b>*</b></span>
+          <input
+            name="businessName"
+            required
+            autoComplete="organization"
+            placeholder="Your business"
+            {...fieldState("businessName")}
+            onBlur={(event) => validateField(event.currentTarget)}
+            onChange={() => clearFieldError("businessName")}
+          />
+          {errors.businessName && <small className="field-error" id="businessName-error"><CircleAlert />{errors.businessName}</small>}
+        </label>
+        <label className="field-wrap">
+          <span className="field-label">Email <b>*</b></span>
+          <input
+            name="email"
+            required
+            type="email"
+            autoComplete="email"
+            placeholder="you@business.com"
+            {...fieldState("email")}
+            onBlur={(event) => validateField(event.currentTarget)}
+            onChange={() => clearFieldError("email")}
+          />
+          {errors.email && <small className="field-error" id="email-error"><CircleAlert />{errors.email}</small>}
+        </label>
+        <label className="field-wrap">
+          <span className="field-label">Phone <b>*</b></span>
+          <input
+            name="phone"
+            required
+            type="tel"
+            minLength={7}
+            autoComplete="tel"
+            placeholder="(603) 555-0123"
+            {...fieldState("phone")}
+            onBlur={(event) => validateField(event.currentTarget)}
+            onChange={() => clearFieldError("phone")}
+          />
+          {errors.phone && <small className="field-error" id="phone-error"><CircleAlert />{errors.phone}</small>}
+        </label>
+        <label className="field-wrap full">
+          <span className="field-label">Current website <em>Optional</em></span>
+          <input
+            name="website"
+            type="url"
+            inputMode="url"
+            placeholder="https://"
+            {...fieldState("website")}
+            onBlur={(event) => validateField(event.currentTarget)}
+            onChange={() => clearFieldError("website")}
+          />
+          {errors.website && <small className="field-error" id="website-error"><CircleAlert />{errors.website}</small>}
+        </label>
+        <label className="field-wrap">
+          <span className="field-label">Type of help <b>*</b></span>
+          <select
+            name="helpType"
+            required
+            defaultValue=""
+            {...fieldState("helpType")}
+            onBlur={(event) => validateField(event.currentTarget)}
+            onChange={() => clearFieldError("helpType")}
           >
-            {isSubmitting ? (
-              <span className="flex items-center justify-center gap-2">
-                <svg className="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Submitting...
-              </span>
-            ) : (
-              'Get My Free Quote →'
-            )}
-          </button>
-        )}
-      </form.Subscribe>
-
-      <p className="text-center text-xs text-slate-400 leading-relaxed">
-        By submitting, you agree to receive calls/texts from ForgedLocal. 
-        Msg frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out. 
-        See <a href="/sms-consent" className="underline hover:text-amber-400">SMS Terms</a>, <a href="/terms" className="underline hover:text-amber-400">Terms</a> &amp; <a href="/privacy" className="underline hover:text-amber-400">Privacy</a>.
+            <option value="" disabled>Select one</option>
+            <option>New website</option>
+            <option>Website redesign</option>
+            <option>Local SEO help</option>
+            <option>Website maintenance</option>
+            <option>Not sure yet</option>
+          </select>
+          {errors.helpType && <small className="field-error" id="helpType-error"><CircleAlert />{errors.helpType}</small>}
+        </label>
+        <label className="field-wrap">
+          <span className="field-label">Preferred contact <b>*</b></span>
+          <select
+            name="contactMethod"
+            required
+            defaultValue=""
+            {...fieldState("contactMethod")}
+            onBlur={(event) => validateField(event.currentTarget)}
+            onChange={() => clearFieldError("contactMethod")}
+          >
+            <option value="" disabled>Select one</option>
+            <option>Email</option>
+            <option>Phone</option>
+            <option>Text message</option>
+          </select>
+          {errors.contactMethod && <small className="field-error" id="contactMethod-error"><CircleAlert />{errors.contactMethod}</small>}
+        </label>
+        <label className="field-wrap full">
+          <span className="field-label">Tell us about the project <b>*</b></span>
+          <textarea
+            name="message"
+            required
+            minLength={20}
+            rows={5}
+            placeholder="What do you do, and what would you like your website to improve?"
+            {...fieldState("message")}
+            onBlur={(event) => validateField(event.currentTarget)}
+            onChange={() => clearFieldError("message")}
+          />
+          {errors.message && <small className="field-error" id="message-error"><CircleAlert />{errors.message}</small>}
+        </label>
+        <label className="honeypot" aria-hidden="true">
+          Leave this field empty
+          <input name="companyUrl" tabIndex={-1} autoComplete="off" />
+        </label>
+      </div>
+      <p className="form-privacy">
+        By submitting, you agree that ForgedLocal may contact you about your request. Your information will not be sold. See our <a href="/privacy">privacy policy</a>.
       </p>
+      <button className="button submit-button" disabled={status.type === "loading"}>
+        {status.type === "loading" ? (
+          <><LoaderCircle className="spinner" /> Reviewing your details…</>
+        ) : (
+          <>Request my free website review <ArrowRight size={18} /></>
+        )}
+      </button>
+      {status.type === "error" && (
+        <p className="form-status error" role="status"><CircleAlert />{status.message}</p>
+      )}
     </form>
-  )
+  );
 }

@@ -42,3 +42,6 @@ next-env.d.ts
 
 # HubSpot config file
 hubspot.config.yml
+
+# Local credentials and recovery codes
+*recovery_code*.txt

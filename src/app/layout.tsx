@@ -1,75 +1,35 @@
-import './globals.css'
-import type { Metadata } from 'next'
-import type { ReactNode } from 'react'
-import { DM_Sans } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/react'
-import { GoogleAdsTag } from '@/components/Analytics'
-
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-dm-sans',
-})
+import "./globals.css";
+import type { Metadata } from "next";
+import type { ReactNode } from "react";
+import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
+import { Analytics } from "@/components/Analytics";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
+import { InteractionLayer } from "@/components/InteractionLayer";
+import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://forgedlocal.com'),
-  title: {
-    default: 'ForgedLocal | Missed Call Text Back for Contractors',
-    template: '%s | ForgedLocal'
-  },
-  description: 'Stop losing $5,000+ jobs to missed calls. ForgedLocal automatically texts back customers within 60 seconds when you can\'t answer. Trusted by HVAC, plumbing, roofing & electrical contractors in New Hampshire.',
-  keywords: ['missed call text back', 'contractor answering service', 'HVAC answering service', 'plumber answering service', 'auto text back', 'lead capture', 'New Hampshire contractors'],
-  authors: [{ name: 'ForgedLocal' }],
-  creator: 'ForgedLocal',
-  publisher: 'ForgedLocal',
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  openGraph: {
-    title: 'ForgedLocal | Stop Losing Jobs to Missed Calls',
-    description: 'Automatically text back customers within 60 seconds. HVAC, plumbing, roofing & electrical contractors trust ForgedLocal.',
-    url: 'https://forgedlocal.com',
-    siteName: 'ForgedLocal',
-    type: 'website',
-    locale: 'en_US',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'ForgedLocal | Missed Call Text Back for Contractors',
-    description: 'Stop losing $5,000+ jobs to voicemail. Auto text-back in 60 seconds.',
-  },
-  alternates: {
-    canonical: 'https://forgedlocal.com',
-  },
-  icons: {
-    icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-    ],
-    apple: '/apple-icon.svg',
-  },
-  verification: {
-    google: 'your-google-verification-code', // Add your Google Search Console verification
-  },
-}
+  metadataBase: new URL(siteConfig.domain),
+  title: { default: "New Hampshire Web Design for Local Businesses | ForgedLocal", template: "%s | ForgedLocal" },
+  description: "Fast, professional websites for contractors and local service businesses in Nashua and across New Hampshire.",
+  alternates: { canonical: siteConfig.domain },
+  openGraph: { title: "ForgedLocal | New Hampshire Web Design", description: "Websites built to help local businesses earn trust and generate inquiries.", url: siteConfig.domain, siteName: siteConfig.name, type: "website", locale: "en_US" },
+  robots: { index: true, follow: true },
+  icons: { icon: "/favicon.svg", apple: "/apple-touch-icon.svg" },
+};
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={dmSans.variable}>
-      <head>
-        <GoogleAdsTag />
-      </head>
-      <body className="bg-[#FFFDF8] text-slate-900 antialiased font-sans">
-        {children}
+    <html lang="en" data-scroll-behavior="smooth">
+      <body>
+        <a className="skip-link" href="#main-content">Skip to content</a>
+        <InteractionLayer />
+        <SiteHeader />
+        <div id="main-content" className="route-content">{children}</div>
+        <SiteFooter />
         <Analytics />
+        <VercelAnalytics />
       </body>
     </html>
-  )
+  );
 }
