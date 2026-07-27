@@ -8,7 +8,7 @@ export function CTASection() {
       <div className="container cta-inner" data-reveal>
         <div>
           <p className="eyebrow light">A useful place to start</p>
-          <h2>Find out what your website could improve.</h2>
+          <h2>Find out how your website could improve.</h2>
           <p>Get a practical review of your mobile experience, messaging, speed, calls to action, credibility, and local search fundamentals.</p>
         </div>
         <Link className="button button-light animated-cta" href="/contact">
