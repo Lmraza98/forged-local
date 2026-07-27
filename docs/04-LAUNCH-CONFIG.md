@@ -8,15 +8,17 @@ and founder photo placeholder. Confirm the email address and canonical domain.
 ## Contact form
 
 The form validates on the client and server, includes a honeypot field, and submits
-to HubSpot. The preferred production path uses an authenticated HubSpot private app:
+to HubSpot. The preferred production path uses a HubSpot Service Key:
 
 ```text
-HUBSPOT_PERSONAL_ACCESS_KEY=
+HUBSPOT_SERVICE_KEY=
 ```
 
-The private app requires permission to read and write CRM contacts. The endpoint
+The Service Key requires permission to read and write CRM contacts. The endpoint
 upserts contacts by email so repeat inquiries update the existing contact. The
 website URL and project details are saved with the inquiry.
+
+`HUBSPOT_PERSONAL_ACCESS_KEY` remains supported for an existing legacy private app.
 
 The anonymous Forms API remains available as a fallback when both variables below
 are configured and the HubSpot portal permits public form submissions:

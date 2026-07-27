@@ -21,6 +21,7 @@ export async function POST(request: Request) {
   const portalId = process.env.HUBSPOT_PORTAL_ID;
   const formGuid = process.env.HUBSPOT_FORM_GUID;
   const accessTokens = [
+    process.env.HUBSPOT_SERVICE_KEY,
     process.env.HUBSPOT_PERSONAL_ACCESS_KEY,
     process.env.HUBSPOT_API_KEY,
   ].filter((token, index, tokens): token is string => Boolean(token) && tokens.indexOf(token) === index);
