@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { Resend } from "resend";
 import { z } from "zod";
 
 const schema = z.object({
@@ -12,6 +13,57 @@ const schema = z.object({
   message: z.string().trim().min(1).max(3000),
   companyUrl: z.string().max(0).optional(),
 });
+
+type Lead = z.infer<typeof schema>;
+
+async function sendLeadNotification(lead: Lead) {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    console.warn("Lead notification skipped because RESEND_API_KEY is not configured.");
+    return;
+  }
+
+  const resend = new Resend(apiKey);
+  const recipient = process.env.LEAD_NOTIFICATION_EMAIL || "lucas@forgedlocal.com";
+  const from = process.env.RESEND_FROM_EMAIL || "ForgedLocal Website <onboarding@resend.dev>";
+  const businessName = lead.businessName.replace(/[\r\n]+/g, " ").trim();
+
+  const { error } = await resend.emails.send({
+    from,
+    to: recipient,
+    replyTo: lead.email,
+    subject: `New website inquiry — ${businessName}`,
+    text: [
+      "A new lead submitted the ForgedLocal website form.",
+      "",
+      `Name: ${lead.name}`,
+      `Business: ${lead.businessName}`,
+      `Email: ${lead.email}`,
+      `Phone: ${lead.phone}`,
+      `Current website: ${lead.website || "Not provided"}`,
+      `Help needed: ${lead.helpType}`,
+      `Preferred contact: ${lead.contactMethod}`,
+      "",
+      "Project details:",
+      lead.message,
+    ].join("\n"),
+  });
+
+  if (error) throw new Error(error.message);
+}
+
+async function submissionSucceeded(lead: Lead) {
+  try {
+    await sendLeadNotification(lead);
+  } catch (error) {
+    console.error(
+      "Lead notification email failed:",
+      error instanceof Error ? error.message : "Unknown Resend error",
+    );
+  }
+
+  return NextResponse.json({ success: true });
+}
 
 export async function POST(request: Request) {
   const parsed = schema.safeParse(await request.json().catch(() => null));
@@ -64,7 +116,7 @@ export async function POST(request: Request) {
           inputs: [{ id: parsed.data.email, idProperty: "email", properties }],
         }),
       });
-      if (crmResponse.ok) return NextResponse.json({ success: true });
+      if (crmResponse.ok) return submissionSucceeded(parsed.data);
       providerResponse = await crmResponse.text();
       if (crmResponse.status !== 401 && crmResponse.status !== 403) break;
     }
@@ -93,5 +145,5 @@ export async function POST(request: Request) {
       { status: 502 },
     );
   }
-  return NextResponse.json({ success: true });
+  return submissionSucceeded(parsed.data);
 }

@@ -57,8 +57,11 @@ body{overflow-x:hidden}
 .hero::after{content:"";position:absolute;inset:auto 0 0;height:170px;z-index:-1;background:linear-gradient(to bottom,transparent,#10241b)}
 .hero-grid-pattern,.page-hero-grid,.cta-grid{position:absolute;inset:0;z-index:-1;opacity:.08;background-image:linear-gradient(rgba(255,255,255,.42) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.42) 1px,transparent 1px);background-size:64px 64px;mask-image:linear-gradient(to bottom,black,transparent 88%)}
 .hero-orbit{position:absolute;z-index:-1;width:680px;height:680px;right:-180px;top:-240px;border:1px solid #b9eda221;border-radius:50%;box-shadow:0 0 0 110px #d7ef9f08,0 0 0 220px #d7ef9f05}
-.hero-grid{grid-template-columns:1.08fr .92fr;gap:72px}
+.hero-grid{position:relative;grid-template-columns:1.08fr .92fr;gap:72px}
 .hero-copy{position:relative;z-index:2}
+.nh-outline{position:absolute;z-index:1;left:42.5%;top:40%;width:clamp(76px,7.4vw,108px);height:auto;color:#fff;opacity:.58;pointer-events:none;transform:translate(-50%,-50%);filter:drop-shadow(0 0 18px rgba(215,239,159,.12))}
+.nh-outline path{stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:1;animation:nh-outline-draw 1.55s cubic-bezier(.22,1,.36,1) .42s forwards}
+@keyframes nh-outline-draw{to{stroke-dashoffset:0}}
 .hero .eyebrow{color:#b8df82}
 .eyebrow-pulse{position:relative;width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 0 5px #9dcc6e18}
 .eyebrow-pulse::after{content:"";position:absolute;inset:-4px;border:1px solid currentColor;border-radius:50%;animation:eyebrow-pulse 2.4s ease-out infinite}
@@ -250,6 +253,7 @@ body{overflow-x:hidden}
   .mobile-navigation .button{margin-top:18px}
   .hero{min-height:auto;padding-top:78px}
   .hero-grid{grid-template-columns:1fr;gap:70px}
+  .nh-outline{display:none}
   .problem-section .split>div:first-child{position:static}
   .visual-system-card{right:5px}
   .process::before{display:none}
@@ -292,6 +296,7 @@ body{overflow-x:hidden}
 }
 @media(prefers-reduced-motion:reduce){
   .motion-ready [data-reveal],.motion-ready .hero-copy .hero-line{opacity:1!important;transform:none!important;filter:none!important}
-  .route-entered .route-content,.route-pending .route-progress,.eyebrow-pulse::after,.visual-aura,.hero-scroll-cue span,.spinner,.skeleton::after,.success-modal-backdrop,.success-modal{animation:none!important}
+  .route-entered .route-content,.route-pending .route-progress,.eyebrow-pulse::after,.visual-aura,.hero-scroll-cue span,.spinner,.skeleton::after,.success-modal-backdrop,.success-modal,.nh-outline path{animation:none!important}
+  .nh-outline path{stroke-dashoffset:0}
   .route-progress{display:none}
 }
