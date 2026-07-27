@@ -1,7 +1,7 @@
 "use client";
 
-import { FormEvent, useState } from "react";
-import { ArrowRight, Check, CircleAlert, LoaderCircle } from "lucide-react";
+import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
+import { ArrowRight, Check, CircleAlert, LoaderCircle, X } from "lucide-react";
 import { trackEvent } from "@/components/Analytics";
 
 type Status = { type: "idle" | "loading" | "success" | "error"; message?: string };
@@ -38,6 +38,48 @@ function validateControl(control: HTMLInputElement | HTMLSelectElement | HTMLTex
 export function ContactForm() {
   const [status, setStatus] = useState<Status>({ type: "idle" });
   const [errors, setErrors] = useState<FieldErrors>({});
+  const modalRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const submitButtonRef = useRef<HTMLButtonElement>(null);
+
+  const closeSuccess = useCallback(() => {
+    setStatus({ type: "idle" });
+    window.requestAnimationFrame(() => submitButtonRef.current?.focus());
+  }, []);
+
+  useEffect(() => {
+    if (status.type !== "success") return;
+
+    const previousOverflow = document.body.style.overflow;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeSuccess();
+      if (event.key !== "Tab") return;
+
+      const focusable = modalRef.current?.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), [href], [tabindex]:not([tabindex="-1"])',
+      );
+      if (!focusable?.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", handleKeyDown);
+    closeButtonRef.current?.focus();
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [closeSuccess, status.type]);
 
   function validateField(control: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement) {
     const message = validateControl(control);
@@ -100,7 +142,7 @@ export function ContactForm() {
       if (!response.ok) throw new Error(result.error || "We could not send your request.");
       form.reset();
       trackEvent("website_review_request", { form_name: "free_website_review" });
-      setStatus({ type: "success", message: "Thanks—your request was sent. We’ll be in touch soon." });
+      setStatus({ type: "success" });
     } catch (error) {
       setStatus({
         type: "error",
@@ -109,26 +151,13 @@ export function ContactForm() {
     }
   }
 
-  if (status.type === "success") {
-    return (
-      <div className="form-success" role="status" data-reveal>
-        <span className="success-icon"><Check /></span>
-        <p className="eyebrow">Request received</p>
-        <h2>You’re on the list.</h2>
-        <p>{status.message}</p>
-        <button className="text-button" type="button" onClick={() => setStatus({ type: "idle" })}>
-          Send another request <ArrowRight size={16} />
-        </button>
-      </div>
-    );
-  }
-
   const fieldState = (name: string, helperId?: string) => ({
     "aria-invalid": Boolean(errors[name]),
     "aria-describedby": errors[name] ? `${name}-error` : helperId,
   });
 
   return (
+    <>
     <form className="contact-form" onSubmit={submit} noValidate data-spotlight>
       <div className="form-heading">
         <span>01</span>
@@ -267,7 +296,7 @@ export function ContactForm() {
       <p className="form-privacy">
         By submitting, you agree that ForgedLocal may contact you about your request. Your information will not be sold. See our <a href="/privacy">privacy policy</a>.
       </p>
-      <button className="button submit-button" disabled={status.type === "loading"}>
+      <button ref={submitButtonRef} className="button submit-button" disabled={status.type === "loading"}>
         {status.type === "loading" ? (
           <><LoaderCircle className="spinner" /> Reviewing your details…</>
         ) : (
@@ -278,5 +307,35 @@ export function ContactForm() {
         <p className="form-status error" role="alert"><CircleAlert />{status.message}</p>
       )}
     </form>
+    {status.type === "success" && (
+      <div className="success-modal-backdrop">
+        <div
+          ref={modalRef}
+          className="success-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="success-modal-title"
+          aria-describedby="success-modal-description"
+        >
+          <button
+            ref={closeButtonRef}
+            className="success-modal-close"
+            type="button"
+            aria-label="Close confirmation"
+            onClick={closeSuccess}
+          >
+            <X />
+          </button>
+          <span className="success-icon" aria-hidden="true"><Check /></span>
+          <p className="eyebrow">Request received</p>
+          <h2 id="success-modal-title">Form submitted successfully.</h2>
+          <p id="success-modal-description">
+            Thank you—we’ve received your request. Expect to hear back from ForgedLocal within 24–48 hours.
+          </p>
+          <button className="button" type="button" onClick={closeSuccess}>Got it</button>
+        </div>
+      </div>
+    )}
+    </>
   );
 }
