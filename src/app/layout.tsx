@@ -15,7 +15,10 @@ export const metadata: Metadata = {
   alternates: { canonical: siteConfig.domain },
   openGraph: { title: "ForgedLocal | New Hampshire Web Design", description: "Websites built to help local businesses earn trust and generate inquiries.", url: siteConfig.domain, siteName: siteConfig.name, type: "website", locale: "en_US" },
   robots: { index: true, follow: true },
-  icons: { icon: "/favicon.svg", apple: "/apple-touch-icon.svg" },
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml", sizes: "96x96" }],
+    apple: [{ url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" }],
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
