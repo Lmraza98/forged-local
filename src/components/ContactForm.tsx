@@ -15,7 +15,7 @@ const validationMessages: Record<string, string> = {
   website: "Include the full address, such as https://example.com.",
   helpType: "Choose the kind of help you need.",
   contactMethod: "Choose how you would like us to respond.",
-  message: "Add a short note about what you need.",
+  message: "Tell us briefly what you need.",
 };
 
 const fieldLabels: Record<string, string> = {
@@ -247,7 +247,6 @@ export function ContactForm() {
           <textarea
             name="message"
             required
-            minLength={5}
             rows={5}
             placeholder="What do you do, and what would you like your website to improve?"
             {...fieldState("message", "message-help")}
