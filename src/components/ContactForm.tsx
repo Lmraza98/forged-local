@@ -15,7 +15,18 @@ const validationMessages: Record<string, string> = {
   website: "Include the full address, such as https://example.com.",
   helpType: "Choose the kind of help you need.",
   contactMethod: "Choose how you would like us to respond.",
-  message: "Tell us a little more—at least 20 characters.",
+  message: "Add a short note about what you need.",
+};
+
+const fieldLabels: Record<string, string> = {
+  name: "Name",
+  businessName: "Business name",
+  email: "Email",
+  phone: "Phone",
+  website: "Current website",
+  helpType: "Type of help",
+  contactMethod: "Preferred contact",
+  message: "Tell us about the project",
 };
 
 function validateControl(control: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement) {
@@ -39,12 +50,14 @@ export function ContactForm() {
   }
 
   function clearFieldError(name: string) {
-    if (!errors[name]) return;
-    setErrors((current) => {
-      const next = { ...current };
-      delete next[name];
-      return next;
-    });
+    if (errors[name]) {
+      setErrors((current) => {
+        const next = { ...current };
+        delete next[name];
+        return next;
+      });
+    }
+    setStatus((current) => current.type === "error" ? { type: "idle" } : current);
   }
 
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -61,8 +74,14 @@ export function ContactForm() {
 
     if (Object.keys(nextErrors).length) {
       setErrors(nextErrors);
-      setStatus({ type: "error", message: "A few details need your attention." });
       const firstInvalid = controls.find((control) => nextErrors[control.name]);
+      const invalidNames = Object.keys(nextErrors);
+      setStatus({
+        type: "error",
+        message: invalidNames.length === 1
+          ? `Please check “${fieldLabels[invalidNames[0]] ?? "the highlighted field"}.”`
+          : `Please check the ${invalidNames.length} highlighted fields.`,
+      });
       firstInvalid?.focus();
       return;
     }
@@ -104,9 +123,9 @@ export function ContactForm() {
     );
   }
 
-  const fieldState = (name: string) => ({
+  const fieldState = (name: string, helperId?: string) => ({
     "aria-invalid": Boolean(errors[name]),
-    "aria-describedby": errors[name] ? `${name}-error` : undefined,
+    "aria-describedby": errors[name] ? `${name}-error` : helperId,
   });
 
   return (
@@ -228,14 +247,18 @@ export function ContactForm() {
           <textarea
             name="message"
             required
-            minLength={20}
+            minLength={5}
             rows={5}
             placeholder="What do you do, and what would you like your website to improve?"
-            {...fieldState("message")}
+            {...fieldState("message", "message-help")}
             onBlur={(event) => validateField(event.currentTarget)}
             onChange={() => clearFieldError("message")}
           />
-          {errors.message && <small className="field-error" id="message-error"><CircleAlert />{errors.message}</small>}
+          {errors.message ? (
+            <small className="field-error" id="message-error"><CircleAlert />{errors.message}</small>
+          ) : (
+            <small id="message-help">A few words is enough—you can keep this brief.</small>
+          )}
         </label>
         <label className="honeypot" aria-hidden="true">
           Leave this field empty
@@ -253,7 +276,7 @@ export function ContactForm() {
         )}
       </button>
       {status.type === "error" && (
-        <p className="form-status error" role="status"><CircleAlert />{status.message}</p>
+        <p className="form-status error" role="alert"><CircleAlert />{status.message}</p>
       )}
     </form>
   );

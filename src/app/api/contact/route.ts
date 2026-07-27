@@ -9,7 +9,7 @@ const schema = z.object({
   website: z.union([z.literal(""), z.string().url()]).optional(),
   helpType: z.enum(["New website", "Website redesign", "Local SEO help", "Website maintenance", "Not sure yet"]),
   contactMethod: z.enum(["Email", "Phone", "Text message"]),
-  message: z.string().trim().min(20).max(3000),
+  message: z.string().trim().min(5).max(3000),
   companyUrl: z.string().max(0).optional(),
 });
 
