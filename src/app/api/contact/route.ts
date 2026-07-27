@@ -20,7 +20,7 @@ async function sendLeadNotification(lead: Lead) {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     console.warn("Lead notification skipped because RESEND_API_KEY is not configured.");
-    return;
+    return false;
   }
 
   const resend = new Resend(apiKey);
@@ -50,11 +50,14 @@ async function sendLeadNotification(lead: Lead) {
   });
 
   if (error) throw new Error(error.message);
+  return true;
 }
 
 async function submissionSucceeded(lead: Lead) {
+  let notificationSent = false;
+
   try {
-    await sendLeadNotification(lead);
+    notificationSent = await sendLeadNotification(lead);
   } catch (error) {
     console.error(
       "Lead notification email failed:",
@@ -62,7 +65,7 @@ async function submissionSucceeded(lead: Lead) {
     );
   }
 
-  return NextResponse.json({ success: true });
+  return NextResponse.json({ success: true, notificationSent });
 }
 
 export async function POST(request: Request) {
