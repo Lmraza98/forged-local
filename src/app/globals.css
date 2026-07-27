@@ -52,7 +52,7 @@ body{overflow-x:hidden}
 .text-link:hover{color:var(--green2);border-color:var(--green2)}
 .text-link:hover svg{transform:translateX(5px)}
 
-.hero{position:relative;min-height:calc(100svh - 82px);padding:clamp(78px,10vh,120px) 0 92px;background:#0d1d17;color:#f8fbf8;isolation:isolate}
+.hero{position:relative;min-height:calc(100svh - 82px);padding:clamp(58px,7vh,84px) 0 92px;background:#0d1d17;color:#f8fbf8;isolation:isolate}
 .hero::before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(700px circle at var(--pointer-x,75%) var(--pointer-y,28%),rgba(93,178,127,.14),transparent 54%),radial-gradient(600px circle at 12% 88%,rgba(211,239,159,.07),transparent 55%)}
 .hero::after{content:"";position:absolute;inset:auto 0 0;height:170px;z-index:-1;background:linear-gradient(to bottom,transparent,#10241b)}
 .hero-grid-pattern,.page-hero-grid,.cta-grid{position:absolute;inset:0;z-index:-1;opacity:.08;background-image:linear-gradient(rgba(255,255,255,.42) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.42) 1px,transparent 1px);background-size:64px 64px;mask-image:linear-gradient(to bottom,black,transparent 88%)}
