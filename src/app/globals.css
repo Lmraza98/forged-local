@@ -10,7 +10,7 @@
 ::selection{background:var(--lime);color:var(--ink)}
 *:focus-visible{outline:3px solid #9ecf52;outline-offset:4px}
 body{overflow-x:hidden}
-.route-content{min-height:60vh}
+.route-content{min-height:calc(100svh - 82px)}
 .route-progress{position:fixed;inset:0 auto auto 0;z-index:1000;width:100%;height:2px;pointer-events:none;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,var(--lime),#69d5a4,var(--lime));box-shadow:0 0 14px #9ee27c;opacity:0}
 .route-pending .route-progress{opacity:1;animation:route-progress 1.4s cubic-bezier(.22,1,.36,1) forwards}
 .route-entered .route-content{animation:route-enter .48s cubic-bezier(.22,1,.36,1) both}
@@ -59,9 +59,9 @@ body{overflow-x:hidden}
 .hero-orbit{position:absolute;z-index:-1;width:680px;height:680px;right:-180px;top:-240px;border:1px solid #b9eda221;border-radius:50%;box-shadow:0 0 0 110px #d7ef9f08,0 0 0 220px #d7ef9f05}
 .hero-grid{position:relative;grid-template-columns:1.08fr .92fr;gap:72px}
 .hero-copy{position:relative;z-index:2}
-.nh-outline{position:absolute;z-index:1;left:42.5%;top:40%;width:clamp(76px,7.4vw,108px);height:auto;color:#fff;opacity:.58;pointer-events:none;transform:translate(-50%,-50%);filter:drop-shadow(0 0 18px rgba(215,239,159,.12))}
-.nh-outline path{stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:1;animation:nh-outline-draw 1.55s cubic-bezier(.22,1,.36,1) .42s forwards}
-@keyframes nh-outline-draw{to{stroke-dashoffset:0}}
+.nh-outline{position:absolute;z-index:1;left:42.5%;top:40%;width:clamp(76px,7.4vw,108px);height:auto;color:#fff;opacity:0;pointer-events:none;transform:translate(-50%,-47%) scale(.985);filter:drop-shadow(0 0 18px rgba(215,239,159,.12));will-change:opacity,transform;animation:nh-outline-in 1.1s cubic-bezier(.22,1,.36,1) .35s forwards}
+.nh-outline path{stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+@keyframes nh-outline-in{to{opacity:.58;transform:translate(-50%,-50%) scale(1)}}
 .hero .eyebrow{color:#b8df82}
 .eyebrow-pulse{position:relative;width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 0 5px #9dcc6e18}
 .eyebrow-pulse::after{content:"";position:absolute;inset:-4px;border:1px solid currentColor;border-radius:50%;animation:eyebrow-pulse 2.4s ease-out infinite}
@@ -101,7 +101,7 @@ body{overflow-x:hidden}
 .visual-system-card b{font-size:.7rem;color:#e7efe9}
 .hero-scroll-cue{position:absolute;left:50%;bottom:17px;display:flex;align-items:center;gap:8px;color:#71867b;font-size:.61rem;text-transform:uppercase;letter-spacing:.14em;transform:translateX(-50%)}
 .hero-scroll-cue span{height:28px;width:1px;background:linear-gradient(var(--lime),transparent);animation:scroll-cue 2.2s ease-in-out infinite}
-@keyframes scroll-cue{50%{transform:scaleY(.45);transform-origin:bottom;opacity:.5}}
+@keyframes scroll-cue{50%{transform:translateY(7px) scaleY(.45);opacity:.5}}
 
 .benefit-bar{position:relative;background:#10241b;border-top:1px solid #ffffff0d}
 .benefit-grid{min-height:96px}
@@ -240,6 +240,7 @@ body{overflow-x:hidden}
 .loading-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:60px}.skeleton-card{height:240px}
 @keyframes skeleton{to{transform:translateX(100%)}}
 
+.site-footer .logo>span:last-child>span{color:var(--lime)}
 .site-footer a{transition:color .2s,transform .2s}.site-footer a:hover{color:var(--lime);transform:translateX(3px)}
 
 @media(max-width:900px){
@@ -296,7 +297,7 @@ body{overflow-x:hidden}
 }
 @media(prefers-reduced-motion:reduce){
   .motion-ready [data-reveal],.motion-ready .hero-copy .hero-line{opacity:1!important;transform:none!important;filter:none!important}
-  .route-entered .route-content,.route-pending .route-progress,.eyebrow-pulse::after,.visual-aura,.hero-scroll-cue span,.spinner,.skeleton::after,.success-modal-backdrop,.success-modal,.nh-outline path{animation:none!important}
-  .nh-outline path{stroke-dashoffset:0}
+  .route-entered .route-content,.route-pending .route-progress,.eyebrow-pulse::after,.visual-aura,.hero-scroll-cue span,.spinner,.skeleton::after,.success-modal-backdrop,.success-modal,.nh-outline{animation:none!important}
+  .nh-outline{opacity:.58;transform:translate(-50%,-50%)}
   .route-progress{display:none}
 }
