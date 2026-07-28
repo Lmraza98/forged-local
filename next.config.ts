@@ -10,6 +10,8 @@ const nextConfig: NextConfig = {
       { source: "/roofing-answering-service", destination: "/services", permanent: true },
       { source: "/landscaping-answering-service", destination: "/services", permanent: true },
       { source: "/sms-signup", destination: "/contact", permanent: true },
+      { source: "/sms-consent", destination: "/privacy", permanent: true },
+      { source: "/terms", destination: "/privacy", permanent: true },
       { source: "/thank-you", destination: "/contact", permanent: true },
     ];
   },
