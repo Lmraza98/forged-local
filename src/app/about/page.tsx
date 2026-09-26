@@ -1,54 +1,5 @@
-import { MessageSquare, Route, Sparkles } from "lucide-react";
 import { PageHero } from "@/components/PageHero";
 import { CTASection } from "@/components/CTASection";
 import { pageMetadata } from "@/lib/metadata";
-import { siteConfig } from "@/config/site";
-
-export const metadata = pageMetadata(
-  "About ForgedLocal",
-  "ForgedLocal is a founder-led New Hampshire web-development business serving contractors and local service businesses.",
-  "/about",
-);
-
-export default function AboutPage() {
-  return (
-    <main>
-      <PageHero eyebrow="About ForgedLocal">Direct, practical website help for local business owners.</PageHero>
-      <section className="content-section">
-        <div className="container split about-intro">
-          <div data-reveal>
-            <p className="eyebrow">A focused web-development business</p>
-            <h2>No account handoffs. No mystery process.</h2>
-          </div>
-          <div data-reveal>
-            <p className="lead-small">ForgedLocal is a founder-led business serving contractors and local service companies in Nashua, Southern New Hampshire, and beyond.</p>
-            <p>Clients work directly with the person planning, writing, designing, and building the website. That keeps communication clear, recommendations practical, and the finished site connected to the goals discussed at the start.</p>
-            <p>The approach is intentionally lean: understand the business, solve the most important website problems, launch a strong foundation, and improve it as the business grows.</p>
-          </div>
-        </div>
-        <div className="container value-rail" data-reveal>
-          <div data-spotlight><MessageSquare /><span>Direct</span><p>One clear point of contact.</p></div>
-          <div data-spotlight><Route /><span>Practical</span><p>Recommendations tied to business goals.</p></div>
-          <div data-spotlight><Sparkles /><span>Detailed</span><p>Care in every visible interaction.</p></div>
-        </div>
-      </section>
-      <section className="section section-tint">
-        <div className="container">
-          <div className="founder-card" data-reveal data-spotlight>
-            <div className="founder-photo">
-              <span className="portrait-grid" aria-hidden="true" />
-              <span>Founder photo<br />placeholder</span>
-            </div>
-            <div className="founder-copy">
-              <p className="eyebrow">Meet the founder</p>
-              <h2>{siteConfig.founder.name}</h2>
-              <p className="lead-small">{siteConfig.founder.bio}</p>
-              <p><strong>Before launch:</strong> replace this clearly marked section with an approved photo and accurate biography. No personal details have been invented.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-      <CTASection />
-    </main>
-  );
-}
+export const metadata = pageMetadata("About ForgedLocal", "Meet Lucas Raza, the founder of ForgedLocal, providing direct IT help for small businesses.", "/about");
+export default function AboutPage(){return <main><PageHero eyebrow="About ForgedLocal">Technology help from someone who wants to understand your business.</PageHero><section className="content-section"><div className="container it-about"><div><p className="eyebrow">Meet the founder</p><h2>Hi, I’m Lucas.</h2></div><div><p className="lead-small">I started ForgedLocal to give small businesses a direct, practical point of contact for their technology.</p><p>My background spans software development, business systems, and hands-on troubleshooting. I like finding the source of a problem, explaining it clearly, and putting a fix in place that people can use.</p><p>That might mean getting a computer or account working again. It might mean sorting out how your team shares files, improving a messy process, or connecting tools that should already work together. I’ll start by understanding what your business is trying to do.</p><p>ForgedLocal is founder-led. When you get in touch, you’ll speak with me about the issue and the scope of the work. I’m based in Nashua, New Hampshire, and can discuss on-site work in Southern New Hampshire and the Greater Boston area, as well as remote projects.</p></div></div></section><CTASection/></main>}

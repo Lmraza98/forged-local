@@ -1,72 +1,16 @@
-import { ArrowRight, Check } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/PageHero";
 import { CTASection } from "@/components/CTASection";
 import { pageMetadata } from "@/lib/metadata";
-import { siteConfig } from "@/config/site";
 
-export const metadata = pageMetadata(
-  "Website Services for New Hampshire Businesses",
-  "New websites, website redesigns, local SEO foundations, Google Business Profile help, and website care for local service businesses.",
-  "/services",
-);
-
+export const metadata = pageMetadata("Small Business IT Services", "IT support, Microsoft 365, office networks, security basics, and technology projects for small businesses in Southern New Hampshire and Greater Boston.", "/services");
 const items = [
-  ["New business websites", "For businesses launching or operating without a credible website.", "Get a professional online home that explains what you do, where you work, and how customers can contact you. We shape the message, design the pages, and build the site so you can stay focused on the business."],
-  ["Website redesigns", "For websites that feel dated, slow, confusing, or ineffective.", "We keep what is useful, fix what is getting in the way, and rebuild around mobile usability, credibility, clear service pages, and stronger calls to action."],
-  ["Local SEO foundations", "Help search engines and local customers understand your business.", "Every build includes useful page titles and descriptions, a search-friendly structure, local service messaging, a sitemap, Search Console readiness, appropriate structured data, and sound performance fundamentals. Rankings are never guaranteed."],
-  ["Google Business Profile assistance", "Improve a key part of your local search presence.", "We can help with setup or optimization, including accurate categories, services, business information, photos, and the connection between your profile and website. ForgedLocal is not affiliated with Google."],
-  ["Website care", "Keep the website running without adding another job to your list.", "Ongoing care can include hosting, software updates, backups, basic content changes, technical maintenance, and direct support when you need help."],
+  ["IT support & troubleshooting", "When work stops, find the cause.", "Help with computers, printers, accounts, email, file access, and the everyday issues that leave people stuck. Remote or on-site support depends on the issue and location."],
+  ["Microsoft 365 & business accounts", "Keep the team set up and access under control.", "Set up users, email, shared files, permissions, MFA, and practical onboarding and offboarding processes. Make the tools your team pays for easier to use."],
+  ["Networks, Wi-Fi & office setup", "A connection should be dependable.", "Troubleshoot connectivity, plan small-office Wi-Fi improvements, and coordinate the moving parts when devices or an office need setting up."],
+  ["Security & backup basics", "Reduce the preventable problems.", "Review account access, MFA, software updates, and backup practices. Get a prioritized list of improvements and help putting them in place."],
+  ["Software & workflow improvements", "Make the tools fit the work.", "Look at how information moves between your team, spreadsheets, and business software. Improve the process, configure what you own, connect systems, or build a focused internal tool when needed."],
+  ["Ongoing IT help", "A familiar contact as your business changes.", "After an initial conversation, we can discuss a support arrangement suited to your systems and needs. Scope, availability, and pricing are agreed in writing."],
 ] as const;
-
-export default function ServicesPage() {
-  return (
-    <main>
-      <PageHero eyebrow="Website services">A better website, built around how your business actually wins work.</PageHero>
-      <section className="content-section services-page-section">
-        <div className="container">
-          <div className="card-grid" data-reveal>
-            {items.map(([title, kicker, description], index) => (
-              <article className="card interactive-card service-detail-card" key={title} data-spotlight>
-                <span className="card-number">0{index + 1}</span>
-                <span className="card-arrow"><ArrowRight /></span>
-                <h3>{title}</h3>
-                <strong>{kicker}</strong>
-                <p>{description}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-      <section className="section section-tint pricing-section">
-        <div className="container">
-          <div className="section-heading" data-reveal>
-            <div>
-              <p className="eyebrow">Straightforward starting points</p>
-              <h2>Pricing that is easy to understand.</h2>
-              <p>Final scope and price depend on your content, page count, and project needs.</p>
-            </div>
-          </div>
-          <div className="pricing-grid" data-reveal>
-            <article className="card price-card" data-spotlight>
-              <span className="price-tier">Foundation</span><h3>Starter Website</h3>
-              <p className="price">From {siteConfig.pricing.starter}</p>
-              <p>For newer businesses that need a clear, professional online presence.</p>
-            </article>
-            <article className="card price-card featured" data-spotlight>
-              <span className="price-tier">Most common</span><h3>Business Website</h3>
-              <p className="price">From {siteConfig.pricing.business}</p>
-              <p>For established businesses that need stronger service pages, lead generation, and local SEO foundations.</p>
-            </article>
-            <article className="card price-card" data-spotlight>
-              <span className="price-tier">Ongoing</span><h3>Website Care</h3>
-              <p className="price">From {siteConfig.pricing.care}</p>
-              <p>For hosting, maintenance, routine updates, and ongoing support.</p>
-            </article>
-          </div>
-          <p className="price-note" data-reveal><Check size={14} /> All prices are starting points, not fixed quotes. You will receive a clear scope before work begins.</p>
-        </div>
-      </section>
-      <CTASection />
-    </main>
-  );
-}
+export default function ServicesPage(){return <main><PageHero eyebrow="What ForgedLocal does">IT help for the problems that interrupt your work—and the systems behind them.</PageHero><section className="content-section"><div className="container"><p className="lead-small service-intro">Bring the actual issue. You don’t have to decide which service it belongs to before reaching out.</p><div className="it-service-grid">{items.map(([title,kicker,description],i)=><article className="it-service" key={title}><span className="it-service-top"><small>0{i+1}</small></span><h2>{title}</h2><strong>{kicker}</strong><p>{description}</p></article>)}</div><div className="service-note"><h2>Have something outside this list?</h2><p>Describe it. If I can help, I’ll explain how. If it needs a different specialist, I’ll be direct about that.</p><Link className="text-link" href="/contact">Talk through the problem <ArrowRight size={17}/></Link></div></div></section><CTASection/></main>}

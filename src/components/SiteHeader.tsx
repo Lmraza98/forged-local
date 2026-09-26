@@ -36,7 +36,7 @@ export function SiteHeader() {
           })}
         </nav>
         <Link className="button button-small desktop-cta" href="/contact">
-          <span>Get a free website review</span>
+          <span>Get IT help</span>
         </Link>
         <button
           className="menu-toggle"
@@ -68,7 +68,7 @@ export function SiteHeader() {
               </Link>
             );
           })}
-          <Link className="button" href="/contact">Get a free website review</Link>
+          <Link className="button" href="/contact">Get IT help</Link>
         </nav>
       </div>
     </header>
