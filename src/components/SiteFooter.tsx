@@ -8,7 +8,7 @@ export function SiteFooter() {
       <div className="container footer-grid">
         <div>
           <Logo />
-          <p>Fast, professional websites for contractors and local service businesses across New Hampshire.</p>
+          <p>Practical IT support and technology projects for small businesses.</p>
           <p className="service-area">{siteConfig.serviceArea}</p>
         </div>
         <div>
@@ -18,9 +18,8 @@ export function SiteFooter() {
         </div>
         <div>
           <h2>Contact</h2>
-          <a href={`tel:${siteConfig.phoneHref}`}>{siteConfig.phone}</a>
           <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
-          <p>Serving New Hampshire</p>
+          <p>Based in Nashua, New Hampshire</p>
         </div>
       </div>
       <div className="container footer-bottom">&copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</div>

@@ -3,15 +3,15 @@ import { PageHero } from "@/components/PageHero";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata(
-  "Get a Free Website Review",
-  "Request a practical website review from ForgedLocal for your New Hampshire contractor or local service business.",
+  "Contact ForgedLocal for IT Help",
+  "Tell ForgedLocal about your small business IT issue or technology project.",
   "/contact",
 );
 
 export default function ContactPage() {
   return (
     <main>
-      <PageHero eyebrow="Free website review">A practical look at what your website could do better.</PageHero>
+      <PageHero eyebrow="Get in touch">Tell us what’s going on with your technology.</PageHero>
       <section className="content-section contact-section">
         <div className="container contact-form-container">
           <div data-reveal><ContactForm /></div>

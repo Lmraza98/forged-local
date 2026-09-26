@@ -12,7 +12,6 @@ const validationMessages: Record<string, string> = {
   businessName: "Please enter your business name.",
   email: "Enter a valid email address.",
   phone: "Enter a phone number where we can reach you.",
-  website: "Include the full address, such as https://example.com.",
   helpType: "Choose the kind of help you need.",
   contactMethod: "Choose how you would like us to respond.",
   message: "Tell us briefly what you need.",
@@ -23,14 +22,12 @@ const fieldLabels: Record<string, string> = {
   businessName: "Business name",
   email: "Email",
   phone: "Phone",
-  website: "Current website",
   helpType: "Type of help",
   contactMethod: "Preferred contact",
-  message: "Tell us about the project",
+  message: "What is happening?",
 };
 
 function validateControl(control: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement) {
-  if (control.name === "website" && !control.value) return "";
   if (control.validity.valid) return "";
   return validationMessages[control.name] ?? "Please check this field.";
 }
@@ -141,7 +138,7 @@ export function ContactForm() {
       const result = await response.json();
       if (!response.ok) throw new Error(result.error || "We could not send your request.");
       form.reset();
-      trackEvent("website_review_request", { form_name: "free_website_review" });
+      trackEvent("it_inquiry", { form_name: "contact" });
       setStatus({ type: "success" });
     } catch (error) {
       setStatus({
@@ -162,8 +159,8 @@ export function ContactForm() {
       <div className="form-heading">
         <span>01</span>
         <div>
-          <h2>Tell us what you’re working with.</h2>
-          <p>Most people finish this in about two minutes.</p>
+          <h2>What can we help with?</h2>
+          <p>A few details are enough to start the conversation.</p>
         </div>
       </div>
       <div className="form-grid">
@@ -215,25 +212,12 @@ export function ContactForm() {
             type="tel"
             minLength={7}
             autoComplete="tel"
-            placeholder="(603) 555-0123"
+            placeholder="Your phone number"
             {...fieldState("phone")}
             onBlur={(event) => validateField(event.currentTarget)}
             onChange={() => clearFieldError("phone")}
           />
           {errors.phone && <small className="field-error" id="phone-error"><CircleAlert />{errors.phone}</small>}
-        </label>
-        <label className="field-wrap full">
-          <span className="field-label">Current website <em>Optional</em></span>
-          <input
-            name="website"
-            type="url"
-            inputMode="url"
-            placeholder="https://"
-            {...fieldState("website")}
-            onBlur={(event) => validateField(event.currentTarget)}
-            onChange={() => clearFieldError("website")}
-          />
-          {errors.website && <small className="field-error" id="website-error"><CircleAlert />{errors.website}</small>}
         </label>
         <label className="field-wrap">
           <span className="field-label">Type of help <b>*</b></span>
@@ -246,10 +230,12 @@ export function ContactForm() {
             onChange={() => clearFieldError("helpType")}
           >
             <option value="" disabled>Select one</option>
-            <option>New website</option>
-            <option>Website redesign</option>
-            <option>Local SEO help</option>
-            <option>Website maintenance</option>
+            <option>Computer or account issue</option>
+            <option>Microsoft 365 or email</option>
+            <option>Network or Wi-Fi</option>
+            <option>Security or backups</option>
+            <option>Software or workflow</option>
+            <option>Ongoing IT support</option>
             <option>Not sure yet</option>
           </select>
           {errors.helpType && <small className="field-error" id="helpType-error"><CircleAlert />{errors.helpType}</small>}
@@ -272,12 +258,12 @@ export function ContactForm() {
           {errors.contactMethod && <small className="field-error" id="contactMethod-error"><CircleAlert />{errors.contactMethod}</small>}
         </label>
         <label className="field-wrap full">
-          <span className="field-label">Tell us about the project <b>*</b></span>
+          <span className="field-label">What is happening? <b>*</b></span>
           <textarea
             name="message"
             required
             rows={5}
-            placeholder="What do you do, and what would you like your website to improve?"
+            placeholder="What is the problem, and how is it affecting your work?"
             {...fieldState("message", "message-help")}
             onBlur={(event) => validateField(event.currentTarget)}
             onChange={() => clearFieldError("message")}
@@ -298,9 +284,9 @@ export function ContactForm() {
       </p>
       <button ref={submitButtonRef} className="button submit-button" disabled={status.type === "loading"}>
         {status.type === "loading" ? (
-          <><LoaderCircle className="spinner" /> Reviewing your details…</>
+          <><LoaderCircle className="spinner" /> Sending your request…</>
         ) : (
-          <>Request my free website review <ArrowRight size={18} /></>
+          <>Send IT request <ArrowRight size={18} /></>
         )}
       </button>
       {status.type === "error" && (
@@ -330,7 +316,7 @@ export function ContactForm() {
           <p className="eyebrow">Request received</p>
           <h2 id="success-modal-title">Form submitted successfully.</h2>
           <p id="success-modal-description">
-            Thank you—we’ve received your request. Expect to hear back from ForgedLocal within 24–48 hours.
+            Thank you—your request has been received. We’ll follow up using your preferred contact method.
           </p>
           <button className="button" type="button" onClick={closeSuccess}>Got it</button>
         </div>

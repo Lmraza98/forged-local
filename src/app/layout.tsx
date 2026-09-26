@@ -10,10 +10,10 @@ import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.domain),
-  title: { default: "New Hampshire Web Design for Local Businesses | ForgedLocal", template: "%s | ForgedLocal" },
-  description: "Fast, professional websites for contractors and local service businesses in Nashua and across New Hampshire.",
+  title: { default: "Small Business IT Support in Southern NH | ForgedLocal", template: "%s | ForgedLocal" },
+  description: "Direct IT support, Microsoft 365 help, office networks, and practical technology projects for small businesses in Southern New Hampshire and Greater Boston.",
   alternates: { canonical: siteConfig.domain },
-  openGraph: { title: "ForgedLocal | New Hampshire Web Design", description: "Websites built to help local businesses earn trust and generate inquiries.", url: siteConfig.domain, siteName: siteConfig.name, type: "website", locale: "en_US" },
+  openGraph: { title: "ForgedLocal | Small Business IT Help", description: "Direct IT support and technology projects for small businesses.", url: siteConfig.domain, siteName: siteConfig.name, type: "website", locale: "en_US" },
   robots: { index: true, follow: true },
   icons: {
     icon: [{ url: "/favicon.svg", type: "image/svg+xml", sizes: "96x96" }],
