@@ -159,7 +159,7 @@ export function ContactForm() {
       <div className="form-heading">
         <span>01</span>
         <div>
-          <h2>What can I help with?</h2>
+          <h2>What can we help with?</h2>
           <p>A few details are enough to start the conversation.</p>
         </div>
       </div>
@@ -316,7 +316,7 @@ export function ContactForm() {
           <p className="eyebrow">Request received</p>
           <h2 id="success-modal-title">Form submitted successfully.</h2>
           <p id="success-modal-description">
-            Thank you—your request has been received. Lucas will follow up using your preferred contact method.
+            Thank you—your request has been received. We’ll follow up using your preferred contact method.
           </p>
           <button className="button" type="button" onClick={closeSuccess}>Got it</button>
         </div>

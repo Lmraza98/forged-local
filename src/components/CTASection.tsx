@@ -9,10 +9,10 @@ export function CTASection() {
         <div>
           <p className="eyebrow light">A useful place to start</p>
           <h2>What’s getting in the way of your work?</h2>
-          <p>Tell me what is happening with your technology. I’ll help you figure out the next step.</p>
+          <p>Tell us what is happening with your technology. We’ll help you figure out the next step.</p>
         </div>
         <Link className="button button-light animated-cta" href="/contact">
-          <span>Talk to Lucas</span><ArrowRight size={18} />
+          <span>Get in touch</span><ArrowRight size={18} />
         </Link>
       </div>
     </section>

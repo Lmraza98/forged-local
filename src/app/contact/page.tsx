@@ -11,7 +11,7 @@ export const metadata = pageMetadata(
 export default function ContactPage() {
   return (
     <main>
-      <PageHero eyebrow="Get in touch">Tell me what’s going on with your technology.</PageHero>
+      <PageHero eyebrow="Get in touch">Tell us what’s going on with your technology.</PageHero>
       <section className="content-section contact-section">
         <div className="container contact-form-container">
           <div data-reveal><ContactForm /></div>
